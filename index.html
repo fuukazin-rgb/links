@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>niche-hobby | フリマせどりツール</title>
+<meta name="description" content="メルカリ×ラクマ×Yahoo!フリマのせどりを効率化するChrome拡張機能">
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.08);
+    --text-primary: #1a1a1a;
+    --text-secondary: #6b6b6b;
+    --text-muted: #aaaaaa;
+    --green-bg: #eaf3de;
+    --green-text: #3b6d11;
+    --purple-bg: #eeedfe;
+    --purple-text: #3c3489;
+    --blue-bg: #e6f1fb;
+    --blue-text: #0c447c;
+    --amber-bg: #faeeda;
+    --amber-text: #854f0b;
+    --red-bg: #fcebeb;
+    --red-text: #a32d2d;
+    --accent: #3c3489;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 2.5rem 1rem 4rem;
+  }
+  .wrap {
+    max-width: 460px;
+    margin: 0 auto;
+  }
+  /* Profile */
+  .profile {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    margin: 0 auto 14px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+  }
+  .name {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .bio {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  /* Section */
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 1.75rem 0 0.6rem 2px;
+  }
+  /* Link button */
+  .link-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 13px 15px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.12s, box-shadow 0.12s;
+  }
+  .link-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  }
+  .link-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  .icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+  .icon-green { background: var(--green-bg); }
+  .icon-purple { background: var(--purple-bg); }
+  .icon-blue { background: var(--blue-bg); }
+  .icon-amber { background: var(--amber-bg); }
+  .icon-red { background: var(--red-bg); }
+  .link-text { flex: 1; min-width: 0; }
+  .link-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+  .link-sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 99px;
+    flex-shrink: 0;
+  }
+  .badge-free { background: var(--green-bg); color: var(--green-text); }
+  .badge-paid { background: var(--purple-bg); color: var(--purple-text); }
+  /* Arrow */
+  .arrow {
+    color: var(--text-muted);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="profile">
+    <div class="avatar">🎯</div>
+    <div class="name">niche-hobby</div>
+    <div class="bio">フリマせどり向けChrome拡張を作っています<br>メルカリ × ラクマ × Yahoo!フリマ</div>
+  </div>
+
+  <div class="section-label">無料ツール</div>
+
+  <a class="link-btn" href="https://chromewebstore.google.com/detail/jdbdnhlllebiifeplcfbchmflbgjgaod" target="_blank" rel="noopener">
+    <div class="icon icon-green">🔍</div>
+    <div class="link-text">
+      <div class="link-title">メルカリ価格比較アシスト</div>
+      <div class="link-sub">価格リサーチを15分→5秒に短縮</div>
+    </div>
+    <span class="badge badge-free">無料</span>
+  </a>
+
+  <div class="section-label">有料ツール</div>
+
+  <a class="link-btn" href="https://fuukazin.gumroad.com/l/rswvg" target="_blank" rel="noopener">
+    <div class="icon icon-purple">📋</div>
+    <div class="link-text">
+      <div class="link-title">フリマ出品アシスト Pro</div>
+      <div class="link-sub">メルカリ→ラクマ・Yahoo!フリマ・ヤフオク</div>
+    </div>
+    <span class="badge badge-paid">有料</span>
+  </a>
+
+  <a class="link-btn" href="https://fuukazin.gumroad.com/l/hnpwm" target="_blank" rel="noopener">
+    <div class="icon icon-blue">📊</div>
+    <div class="link-text">
+      <div class="link-title">フリマ管理アシスト</div>
+      <div class="link-sub">メルカリ→ラクマ・ヤフオクを一元管理</div>
+    </div>
+    <span class="badge badge-paid">有料</span>
+  </a>
+
+  <div class="section-label">コンテンツ</div>
+
+  <a class="link-btn" href="https://note.com/niche_hobby" target="_blank" rel="noopener">
+    <div class="icon icon-amber">✏️</div>
+    <div class="link-text">
+      <div class="link-title">note記事</div>
+      <div class="link-sub">使い方・活用法を詳しく解説</div>
+    </div>
+  </a>
+
+  <a class="link-btn" href="https://youtu.be/4KIaTdHSBn8" target="_blank" rel="noopener">
+    <div class="icon icon-red">▶️</div>
+    <div class="link-text">
+      <div class="link-title">YouTube（出品アシスト Pro）</div>
+      <div class="link-sub">デモ動画・操作説明</div>
+    </div>
+  </a>
+
+  <a class="link-btn" href="https://lin.ee/u6rgCbP" target="_blank" rel="noopener">
+    <div class="icon icon-green">💬</div>
+    <div class="link-text">
+      <div class="link-title">LINE公式アカウント</div>
+      <div class="link-sub">@978rgtyk　サポート・お問い合わせ</div>
+    </div>
+  </a>
+
+  <div class="footer">© niche-hobby</div>
+</div>
+</body>
+</html>
