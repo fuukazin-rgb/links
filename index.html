@@ -24,11 +24,8 @@
     --display:"Space Grotesk", system-ui, sans-serif;
     --jp:"Zen Kaku Gothic New", system-ui, sans-serif;
   }
-
   *{box-sizing:border-box;margin:0;padding:0}
-
   html{scroll-behavior:smooth}
-
   body{
     font-family:var(--jp);
     color:var(--text);
@@ -38,7 +35,6 @@
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
-
   /* Ambient background: layered glows + fine grain */
   .bg{position:fixed;inset:0;z-index:-2;background:
     radial-gradient(680px 520px at 50% -6%, rgba(255,78,66,.22), transparent 60%),
@@ -47,18 +43,14 @@
     linear-gradient(180deg,var(--ink) 0%, var(--ink-2) 55%, var(--ink) 100%);}
   .grain{position:fixed;inset:0;z-index:-1;opacity:.05;pointer-events:none;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
-
   .wrap{
     max-width:540px;
     margin:0 auto;
     padding:76px 22px 60px;
   }
-
   /* ---------- HERO ---------- */
   .hero{text-align:center;margin-bottom:52px}
-
   .stage{perspective:900px;display:flex;justify-content:center;margin-bottom:26px}
-
   .bull{
     position:relative;
     width:126px;height:126px;border-radius:50%;
@@ -86,9 +78,7 @@
     mix-blend-mode:screen;}
   .bull::after{content:"";position:absolute;inset:-1px;border-radius:50%;
     border:1px solid rgba(255,255,255,.14);}
-
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-
   .name{
     font-family:var(--display);
     font-weight:600;
@@ -97,14 +87,12 @@
     line-height:1.1;
   }
   .name b{color:var(--bull);font-weight:600}
-
   .tag{color:var(--muted);font-size:14.5px;margin-top:12px;font-weight:500}
   .tag .en{
     display:inline-block;margin-top:6px;color:var(--text);
     font-family:var(--display);font-size:12.5px;letter-spacing:.14em;
     opacity:.7;font-weight:500;
   }
-
   /* ---------- SECTION LABEL ---------- */
   .eyebrow{display:flex;align-items:center;gap:12px;margin:34px 2px 14px}
   .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--bull);
@@ -113,7 +101,6 @@
   .eyebrow .en{font-family:var(--display);font-size:11px;letter-spacing:.18em;
     color:var(--muted);font-weight:500}
   .eyebrow .line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
-
   /* ---------- CARD ---------- */
   .card{
     --rx:0deg;--ry:0deg;--mx:50%;--my:50%;
@@ -142,33 +129,31 @@
   }
   .card:hover::before{opacity:1}
   .card:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
-
   .ic{flex:none;width:46px;height:46px;border-radius:13px;
     display:grid;place-items:center;font-size:21px;
     background:linear-gradient(160deg, rgba(255,255,255,.12), rgba(255,255,255,.03));
     border:1px solid rgba(255,255,255,.10);
     box-shadow:inset 0 1px 2px rgba(255,255,255,.14), 0 4px 10px -4px rgba(0,0,0,.5)}
-
   .txt{flex:1;min-width:0}
   .txt .t{font-weight:700;font-size:15.5px;letter-spacing:.01em}
   .txt .s{color:var(--muted);font-size:12.5px;margin-top:2px;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
   .badge{flex:none;font-family:var(--display);font-size:11px;font-weight:600;
     letter-spacing:.04em;padding:5px 10px;border-radius:999px;line-height:1}
   .badge.free{color:#7EE0A8;background:rgba(126,224,168,.10);border:1px solid rgba(126,224,168,.28)}
   .badge.paid{color:var(--gold);background:rgba(232,176,75,.10);border:1px solid rgba(232,176,75,.30)}
   .arrow{flex:none;color:var(--muted);font-size:15px;transition:transform .22s,color .22s}
   .card:hover .arrow{color:var(--bull);transform:translateX(3px)}
-
   /* ---------- FOOTER ---------- */
   footer{text-align:center;margin-top:44px;color:var(--muted);font-size:12px}
   footer .en{font-family:var(--display);letter-spacing:.12em}
-
+  footer .legal{margin-bottom:12px}
+  footer .legal a{color:var(--muted);text-decoration:none;font-size:12px;
+    border-bottom:1px solid rgba(255,255,255,.14);padding-bottom:1px;transition:color .2s,border-color .2s}
+  footer .legal a:hover{color:var(--text);border-color:var(--bull)}
   /* entrance */
   .rise{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
   @keyframes rise{to{opacity:1;transform:translateY(0)}}
-
   @media (prefers-reduced-motion: reduce){
     .bull{animation:none}
     .rise{animation:none;opacity:1;transform:none}
@@ -179,7 +164,6 @@
 <body>
   <div class="bg"></div>
   <div class="grain"></div>
-
   <main class="wrap">
     <header class="hero">
       <div class="stage rise" style="animation-delay:.05s">
@@ -191,7 +175,6 @@
         <span class="en">MERCARI &times; RAKUMA &times; YAHOO!FRIMA</span>
       </p>
     </header>
-
     <!-- 無料ツール -->
     <div class="eyebrow rise" style="animation-delay:.24s">
       <span class="dot"></span><h2>無料ツール</h2><span class="en">FREE</span><span class="line"></span>
@@ -202,7 +185,6 @@
       <span class="badge free">無料</span>
       <span class="arrow">→</span>
     </a>
-
     <!-- 有料ツール -->
     <div class="eyebrow rise" style="animation-delay:.34s">
       <span class="dot"></span><h2>有料ツール</h2><span class="en">PRO TOOLS</span><span class="line"></span>
@@ -219,7 +201,6 @@
       <span class="badge paid">有料</span>
       <span class="arrow">→</span>
     </a>
-
     <!-- コンテンツ -->
     <div class="eyebrow rise" style="animation-delay:.5s">
       <span class="dot"></span><h2>コンテンツ</h2><span class="en">CONTENT</span><span class="line"></span>
@@ -239,16 +220,14 @@
       <span class="txt"><span class="t">LINE公式アカウント</span><span class="s">@978rgtyk　サポート・お問い合わせ</span></span>
       <span class="arrow">→</span>
     </a>
-
     <footer class="rise" style="animation-delay:.68s">
+      <div class="legal"><a href="/tokusho">特定商取引法に基づく表記</a></div>
       <span class="en">© niche-hobby</span>
     </footer>
   </main>
-
 <script>
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   // 3D bullseye tilt toward pointer
   var bull = document.getElementById('bull');
   if(bull && !reduce && window.matchMedia('(pointer:fine)').matches){
@@ -259,7 +238,6 @@
       bull.style.transform = 'rotateX('+(-dy*20)+'deg) rotateY('+(dx*24)+'deg)';
     });
   }
-
   // Card sheen + subtle tilt
   document.querySelectorAll('.card').forEach(function(card){
     card.addEventListener('pointermove', function(e){
