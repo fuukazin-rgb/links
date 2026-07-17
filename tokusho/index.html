@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>特定商取引法に基づく表記 | niche-hobby</title>
+<meta name="description" content="niche-hobby の特定商取引法に基づく表記">
+<style>
+  :root{
+    --bg:#0a0e1a;
+    --bg2:#0f1424;
+    --card:#141a2e;
+    --line:#232b45;
+    --text:#e6e9f2;
+    --muted:#9aa3c0;
+    --blue:#4f7cff;
+    --red:#ff5470;
+    --glow-blue:rgba(79,124,255,.35);
+    --glow-red:rgba(255,84,112,.30);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    position:relative;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    top:-20%;left:-10%;
+    width:60%;height:60%;
+    background:radial-gradient(circle,var(--glow-blue),transparent 70%);
+    filter:blur(80px);
+    z-index:0;
+    pointer-events:none;
+  }
+  body::after{
+    content:"";
+    position:fixed;
+    bottom:-20%;right:-10%;
+    width:55%;height:55%;
+    background:radial-gradient(circle,var(--glow-red),transparent 70%);
+    filter:blur(80px);
+    z-index:0;
+    pointer-events:none;
+  }
+  .wrap{
+    position:relative;
+    z-index:1;
+    max-width:820px;
+    margin:0 auto;
+    padding:56px 20px 80px;
+  }
+  .brand{
+    text-align:center;
+    margin-bottom:8px;
+  }
+  .brand a{
+    font-size:26px;
+    font-weight:800;
+    letter-spacing:.02em;
+    color:var(--text);
+    text-decoration:none;
+  }
+  .brand a span{
+    background:linear-gradient(90deg,var(--blue),var(--red));
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  h1{
+    text-align:center;
+    font-size:clamp(22px,5vw,30px);
+    font-weight:800;
+    margin:22px 0 6px;
+    letter-spacing:.01em;
+  }
+  .sub{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    margin-bottom:30px;
+  }
+  .notice{
+    background:linear-gradient(180deg,rgba(79,124,255,.10),rgba(79,124,255,.02));
+    border:1px solid var(--line);
+    border-left:3px solid var(--blue);
+    border-radius:12px;
+    padding:16px 18px;
+    font-size:14px;
+    color:var(--muted);
+    margin-bottom:28px;
+  }
+  .notice strong{color:var(--text);font-weight:700;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+  }
+  .row{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    border-bottom:1px solid var(--line);
+  }
+  .row:last-child{border-bottom:none;}
+  .row dt{
+    padding:18px 20px;
+    font-weight:700;
+    font-size:14px;
+    background:rgba(255,255,255,.02);
+    border-right:1px solid var(--line);
+    color:var(--text);
+  }
+  .row dd{
+    padding:18px 20px;
+    font-size:14px;
+    color:var(--muted);
+  }
+  .row dd a{color:var(--blue);text-decoration:none;word-break:break-all;}
+  .row dd a:hover{text-decoration:underline;}
+  .row dd .em{color:var(--text);}
+  .tag{
+    display:inline-block;
+    font-size:12px;
+    color:var(--blue);
+    border:1px solid var(--blue);
+    border-radius:6px;
+    padding:1px 8px;
+    margin-left:6px;
+    vertical-align:middle;
+  }
+  .back{
+    text-align:center;
+    margin-top:34px;
+  }
+  .back a{
+    display:inline-block;
+    color:var(--muted);
+    text-decoration:none;
+    font-size:14px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:9px 22px;
+    transition:.2s;
+  }
+  .back a:hover{color:var(--text);border-color:var(--blue);}
+  .foot{
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+    margin-top:40px;
+    opacity:.7;
+  }
+  @media(max-width:560px){
+    .row{grid-template-columns:1fr;}
+    .row dt{border-right:none;border-bottom:1px solid var(--line);}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand"><a href="https://niche-hobby.com">niche<span>-</span>hobby</a></div>
+    <h1>特定商取引法に基づく表記</h1>
+    <p class="sub">Legal Notice</p>
+
+    <div class="notice">
+      本ページに記載のない事項のうち、<strong>販売事業者の氏名・住所・電話番号</strong>については、
+      ご請求をいただいた場合に<strong>遅滞なく開示</strong>いたします。
+      下記メールアドレスまでお問い合わせください。
+    </div>
+
+    <dl class="card">
+      <div class="row">
+        <dt>販売事業者</dt>
+        <dd><span class="em">niche-hobby</span><span class="tag">氏名は請求により開示</span></dd>
+      </div>
+      <div class="row">
+        <dt>運営統括責任者</dt>
+        <dd>請求により遅滞なく開示いたします</dd>
+      </div>
+      <div class="row">
+        <dt>所在地</dt>
+        <dd>請求により遅滞なく開示いたします</dd>
+      </div>
+      <div class="row">
+        <dt>電話番号</dt>
+        <dd>請求により遅滞なく開示いたします</dd>
+      </div>
+      <div class="row">
+        <dt>メールアドレス</dt>
+        <dd><a href="mailto:support@niche-hobby.com">support@niche-hobby.com</a></dd>
+      </div>
+      <div class="row">
+        <dt>販売URL</dt>
+        <dd>
+          <a href="https://niche-hobby.com">https://niche-hobby.com</a><br>
+          <a href="https://shop.niche-hobby.com">https://shop.niche-hobby.com</a>
+        </dd>
+      </div>
+      <div class="row">
+        <dt>販売価格</dt>
+        <dd>
+          <span class="em">フリマ出品アシスト Pro</span>：月額 ¥690／年額 ¥5,900（税込）<br>
+          <span class="em">フリマ管理アシスト</span>：月額 ¥690／年額 ¥5,900（税込）<br>
+          ※各商品ページに表示された価格に準じます。
+        </dd>
+      </div>
+      <div class="row">
+        <dt>商品代金以外の必要料金</dt>
+        <dd>なし（ダウンロード・利用に伴う通信料はお客様のご負担となります）</dd>
+      </div>
+      <div class="row">
+        <dt>お支払い方法</dt>
+        <dd>クレジットカード等（決済代行サービス Gumroad を通じて処理されます）</dd>
+      </div>
+      <div class="row">
+        <dt>お支払い時期</dt>
+        <dd>お申し込み時にご請求いたします。サブスクリプションは、無料トライアル終了後の初回課金日および以降の各更新日にご請求いたします。</dd>
+      </div>
+      <div class="row">
+        <dt>商品の引渡時期</dt>
+        <dd>決済完了後、ライセンスキーをご登録のメールアドレスへ自動送信いたします（通常は即時〜数分以内）。万一届かない場合は上記メールアドレスまでご連絡ください。</dd>
+      </div>
+      <div class="row">
+        <dt>返品・キャンセル</dt>
+        <dd>
+          デジタル商品の性質上、課金開始後の返品・返金は原則としてお受けできません。<br>
+          無料トライアル期間中に解約された場合、料金は一切発生しません。<br>
+          商品に不具合がある場合は、上記メールアドレスまでご連絡ください。個別に対応いたします。
+        </dd>
+      </div>
+      <div class="row">
+        <dt>動作環境</dt>
+        <dd>Google Chrome（最新版を推奨）</dd>
+      </div>
+    </dl>
+
+    <div class="back"><a href="https://niche-hobby.com">← トップページに戻る</a></div>
+    <p class="foot">© niche-hobby</p>
+  </div>
+</body>
+</html>
