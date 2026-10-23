@@ -3,672 +3,690 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>niche-hobby</title>
-<meta name="description" content="メルカリに出品したら、ラクマ・Yahoo!フリマ・ヤフオクにも転記。フリマせどりの出品と管理を速くするChrome拡張機能。">
+<title>niche-hobby | フリマせどりのChrome拡張</title>
+<meta name="description" content="メルカリに出品したら、ラクマ・Yahoo!フリマ・ヤフオクにも転記。売れたら他サイトの削除まで案内。フリマせどりの出品と管理を速くするChrome拡張機能。">
 <meta property="og:title" content="niche-hobby | フリマせどりのChrome拡張">
 <meta property="og:description" content="メルカリに出品したら、ラクマ・Yahoo!フリマ・ヤフオクにも転記。出品と管理を速くするChrome拡張機能。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://niche-hobby.com/">
 <meta property="og:image" content="https://niche-hobby.com/images/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="images/icon-pro.png">
+<meta name="theme-color" content="#08090C">
+<link rel="icon" href="images/nh-mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="images/icon-pro.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-/* Layout: fixed top bar + floating bottom tabs frame a full-screen WebGL warehouse of kraft boxes tagged in each marketplace's color. Below: problem, tools (real Pro screenshot + dashboard mockups), pricing, field matrix, movies, steps, FAQ, contact. Warm paper and kraft brown carry the page; the four marketplace colors appear only where a marketplace is meant. */
+/* 近未来ダーク。インク黒の空間に、nh モノグラムがエメラルドに発光して浮かぶ。
+   発光はエメラルドだけ、マーケットの色はバッジにだけ。 */
 :root{
-  --paper:#F6F1E9;
-  --surface:#FFFFFF;
-  --ink:#1A1F2C;
-  --g1:#3F4555;
-  --g2:#6E7383;
-  --g3:#C9C1B4;
-  --g4:#ECE5DA;
-  --kraft:#B9874F;
-  --kraft-d:#8A5F31;
-  --kraft-soft:#F1E3CF;
-  --mercari:#EA352D;
-  --rakuma:#2563EB;
-  --yfrima:#FF5263;
-  --yauc:#E60033;
-  --ok:#14966B;
-  --ok-soft:#E1F4EC;
-  --on-ink:#FFFFFF;
-  --glass:rgba(255,255,255,.80);
-  --shadow:rgba(60,40,15,.18);
-  --scene-bg:#EFE4D3;
-  --scene-box:#C49A68;
-  --scene-floor:#D9CDBB;
-  --scene-tape:#E8D6B6;
-  --grain-op:.07;
-  --display:"Barlow","Zen Kaku Gothic New",system-ui,sans-serif;
-  --jp:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  --void:#08090C;
+  --ink:#15151A;
+  --panel:rgba(22,24,30,.62);
+  --panel-solid:#14161B;
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.14);
+  --text:#F6F5F2;
+  --t2:#B9BCC4;
+  --t3:#7D828D;
+  --em:#12A37A;
+  --em-hi:#2EE6A8;
+  --em-glow:rgba(18,163,122,.55);
+  --em-soft:rgba(18,163,122,.12);
+  --mercari:#FF4B43;
+  --rakuma:#4C82FF;
+  --yfrima:#FF6B7B;
+  --yauc:#FF3355;
+  --sans:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  --display:"Sora","Zen Kaku Gothic New",system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
-  color-scheme:light;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --paper:#15171D;--surface:#1D2028;--ink:#F2EEE7;--g1:#CFCAC2;--g2:#9A968F;--g3:#3E4049;--g4:#272A33;
-    --kraft:#D3A46B;--kraft-d:#E8BE87;--kraft-soft:#352A1E;--ok:#3CC793;--ok-soft:#163328;--on-ink:#15171D;
-    --glass:rgba(29,32,40,.80);--shadow:rgba(0,0,0,.5);
-    --scene-bg:#20283A;--scene-box:#8C6A44;--scene-floor:#2A2F3A;--scene-tape:#A8916C;--grain-op:.12;
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#15171D;--surface:#1D2028;--ink:#F2EEE7;--g1:#CFCAC2;--g2:#9A968F;--g3:#3E4049;--g4:#272A33;
-  --kraft:#D3A46B;--kraft-d:#E8BE87;--kraft-soft:#352A1E;--ok:#3CC793;--ok-soft:#163328;--on-ink:#15171D;
-  --glass:rgba(29,32,40,.80);--shadow:rgba(0,0,0,.5);
-  --scene-bg:#20283A;--scene-box:#8C6A44;--scene-floor:#2A2F3A;--scene-tape:#A8916C;--grain-op:.12;
   color-scheme:dark;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--jp);font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-img{max-width:100%;display:block}
+@property --spin{syntax:"<angle>";initial-value:0deg;inherits:false}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{background:var(--void);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
+img{max-width:100%;display:block}
 button{font:inherit;color:inherit}
-:focus-visible{outline:2px solid var(--kraft-d);outline-offset:3px}
-.wrap{max-width:1160px;margin:0 auto;padding-inline:20px}
-h1,h2,h3{text-wrap:balance;margin:0;line-height:1.3}
-p{margin:0}
+::selection{background:var(--em);color:#fff}
 
-.grain{position:fixed;inset:-50%;z-index:60;pointer-events:none;opacity:var(--grain-op);
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .45 0 0 0 0 .4 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain 1s steps(6) infinite}
-@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
-body.still .grain{animation:none}
+/* 背景：うっすら動くグリッドとノイズ */
+.bg{position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(1200px 700px at 80% -10%,rgba(18,163,122,.18),transparent 60%),
+    radial-gradient(900px 600px at -10% 40%,rgba(46,230,168,.07),transparent 60%),
+    var(--void)}
+.bg::after{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse at 50% 30%,#000 30%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 30%,transparent 75%);
+  animation:gridDrift 30s linear infinite}
+@keyframes gridDrift{to{background-position:0 64px,64px 0}}
 
-/* marketplace color chips */
-.mk{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;padding:4px 12px 4px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--g4);white-space:nowrap}
-.mk::before{content:"";width:9px;height:9px;border-radius:3px;background:var(--c)}
-.mk.m{--c:var(--mercari)}.mk.r{--c:var(--rakuma)}.mk.f{--c:var(--yfrima)}.mk.a{--c:var(--yauc)}
+/* ヘッダー */
+.top{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;gap:16px;padding:14px max(20px,env(safe-area-inset-left));
+  background:linear-gradient(rgba(8,9,12,.85),rgba(8,9,12,.55));backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
+.brand svg{width:44px;height:36px;overflow:visible}
+.brand .mk-n{stroke:var(--text)}
+.brand .mk-h{stroke:var(--em);animation:breathe 3.6s ease-in-out infinite}
+@keyframes breathe{
+  0%,100%{filter:drop-shadow(0 0 2px rgba(18,163,122,.5))}
+  50%{filter:drop-shadow(0 0 9px rgba(46,230,168,.95)) drop-shadow(0 0 18px rgba(18,163,122,.6))}}
+.brand b{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:.01em;line-height:1}
+.brand b span{color:var(--em-hi);text-shadow:0 0 12px var(--em-glow)}
+.nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;font-size:13.5px;font-weight:700;color:var(--t2);padding:8px 13px;border-radius:8px;transition:color .2s,background .2s}
+.nav a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.nav a.monon-link{color:var(--text);border:1px solid var(--line-2)}
+.motion{flex:none;width:40px;height:40px;border-radius:10px;border:1px solid var(--line-2);background:transparent;cursor:pointer;display:grid;place-items:center;color:var(--t2)}
+.motion:hover{color:var(--em-hi);border-color:var(--em)}
+.motion svg{width:18px;height:18px}
+@media (max-width:860px){
+  .top{flex-wrap:wrap;padding:10px 16px;gap:8px}
+  .nav{order:3;width:100%;margin:0 -16px;padding:0 12px}
+  .nav a{font-size:12.5px;padding:6px 10px}
+  .motion{margin-left:auto}
+}
 
-/* ---------- fixed top bar ---------- */
-.top{position:fixed;left:0;right:0;top:0;z-index:50;padding:calc(16px + env(safe-area-inset-top,0px)) clamp(16px,3vw,36px) 0;display:grid;grid-template-columns:1fr auto 1fr;align-items:start;gap:16px;pointer-events:none}
-.top > *{pointer-events:auto}
-.logo{text-decoration:none;display:inline-flex;align-items:center;gap:12px}
-.logo img{width:44px;height:44px;border-radius:10px;box-shadow:0 6px 16px -6px var(--shadow);background:#fff}
-.logo b{display:block;white-space:nowrap;font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:.01em;line-height:1.1;text-transform:uppercase}
-.logo small{display:block;font-family:var(--display);font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--g1)}
-.where{text-align:center;font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.04em;line-height:1.9;color:var(--g1);font-variant-numeric:tabular-nums;padding:6px 14px;border-radius:6px;background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.ctrl{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
-.chipbtn{height:42px;display:inline-flex;align-items:center;gap:10px;padding:0 18px;border:0;border-radius:6px;background:var(--surface);color:var(--ink);font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.02em;cursor:pointer;text-decoration:none;white-space:nowrap;box-shadow:0 6px 18px -10px var(--shadow)}
-.chipbtn .ring{width:20px;height:20px;border-radius:50%;border:1.6px solid currentColor;display:grid;place-items:center}
-.chipbtn .ring::before{content:"";width:6px;height:8px;border-inline:2px solid currentColor}
-.chipbtn[aria-pressed="false"] .ring::before{width:0;height:0;border:0;border-left:7px solid currentColor;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;margin-left:2px}
-.seg{display:inline-flex;height:42px;border-radius:6px;overflow:hidden;background:var(--surface);box-shadow:0 6px 18px -10px var(--shadow)}
-.seg button{border:0;background:transparent;padding:0 18px;font-family:var(--display);font-weight:700;font-size:14px;cursor:pointer;color:var(--g2)}
-.seg button[aria-pressed="true"]{background:var(--ink);color:var(--on-ink)}
-.chipbtn.cta{background:var(--mercari);color:#fff;min-width:150px;justify-content:center}
-@media (max-width:980px){.where{display:none}.top{grid-template-columns:1fr auto}}
-@media (max-width:480px){.top .logo span{display:none}}
-@media (max-width:640px){.chipbtn.motion .lbl,.chipbtn.cta,.logo small{display:none}.chipbtn,.seg{height:38px}.seg button{padding:0 12px;font-size:13px}.logo b{font-size:18px}.logo img{width:38px;height:38px}}
+/* ヒーロー */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:140px 0 90px;overflow:hidden}
+#scene{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:200px;background:linear-gradient(transparent,var(--void));z-index:1;pointer-events:none}
+.wrap{width:min(1180px,100% - 32px);margin:0 auto;position:relative}
+.hero .wrap{z-index:2}
+.copy{max-width:800px}
+.markets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.mk{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;padding:5px 12px 5px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line-2);backdrop-filter:blur(8px)}
+.mk i{width:8px;height:8px;border-radius:50%;box-shadow:0 0 8px currentColor}
+.mk.m i{background:var(--mercari);color:var(--mercari)}
+.mk.r i{background:var(--rakuma);color:var(--rakuma)}
+.mk.y i{background:var(--yfrima);color:var(--yfrima)}
+.mk.a i{background:var(--yauc);color:var(--yauc)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--em-hi);text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--em-hi);box-shadow:0 0 8px var(--em-hi)}
+.hero h1{font-weight:900;font-size:clamp(33px,9.2vw,80px);line-height:1.1;letter-spacing:-.02em;margin-top:18px}
+.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--em-hi),#9BFFE0 40%,var(--em) 80%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(46,230,168,.45))}
+.hero .en{font-family:var(--display);font-weight:600;font-size:clamp(15px,1.6vw,19px);color:var(--t2);margin-top:16px;letter-spacing:.02em}
+.hero p.lead{max-width:30em;color:var(--t2);font-size:15.5px;margin-top:22px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border-radius:12px;font-weight:700;font-size:15px;text-decoration:none;white-space:nowrap;border:1px solid var(--line-2);background:rgba(255,255,255,.04);color:var(--text);backdrop-filter:blur(8px);transition:transform .2s,box-shadow .25s,border-color .2s,background .2s}
+.btn:hover{transform:translateY(-2px);border-color:var(--em);box-shadow:0 0 0 1px var(--em),0 10px 30px -10px var(--em-glow)}
+.btn.pri{background:linear-gradient(135deg,#17B888,var(--em) 55%,#0C7A5B);border-color:transparent;box-shadow:0 0 0 1px rgba(46,230,168,.35),0 12px 40px -12px var(--em-glow),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn.pri:hover{box-shadow:0 0 0 1px var(--em-hi),0 14px 50px -10px rgba(46,230,168,.8),inset 0 1px 0 rgba(255,255,255,.3)}
+.btn.sm{height:44px;padding:0 18px;font-size:14px;border-radius:10px}
+.scroll-hint{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:2;font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;color:var(--t3);display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-hint::after{content:"";width:1px;height:42px;background:linear-gradient(var(--em-hi),transparent);animation:drip 2.2s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.hud{position:absolute;right:max(20px,4vw);bottom:40px;z-index:2;font-family:var(--mono);font-size:11px;color:var(--t3);text-align:right;line-height:1.9;letter-spacing:.08em}
+.hud b{color:var(--em-hi);font-weight:600}
+@media (max-width:860px){.hud,.scroll-hint{display:none}.hero{padding-top:330px;align-items:flex-start}.eyebrow{letter-spacing:.1em;font-size:11px}}
 
-/* ---------- floating bottom tabs ---------- */
-.tabs{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;display:flex;gap:4px;padding:5px;border-radius:10px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 14px 40px -16px var(--shadow);max-width:calc(100% - 32px);overflow-x:auto;scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tabs a{flex:none;text-decoration:none;font-size:13.5px;font-weight:700;padding:9px 16px;border-radius:7px;white-space:nowrap;color:var(--g1);transition:background .2s,color .2s}
-.tabs a:hover{background:var(--g4);color:var(--ink)}
-.tabs a.on{background:var(--ink);color:var(--on-ink)}
-@media (max-width:640px){.tabs a{padding:8px 11px;font-size:12.5px}}
+/* 共通セクション */
+section{position:relative;padding:120px 0}
+.head{margin-bottom:56px}
+.head .en{font-family:var(--display);font-weight:800;font-size:clamp(46px,8vw,104px);line-height:.95;letter-spacing:-.03em;margin-top:14px;
+  background:linear-gradient(180deg,#fff 20%,rgba(255,255,255,.25));-webkit-background-clip:text;background-clip:text;color:transparent}
+.head h2{font-size:19px;font-weight:900;margin-top:14px}
+.head p{color:var(--t2);font-size:15px;max-width:34em;margin-top:8px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
 
-/* ---------- hero (WebGL) ---------- */
-.hero{position:relative;height:100svh;min-height:620px;overflow:hidden;background:var(--scene-bg) url("images/hero.jpg") center/cover no-repeat}
-#gl{position:absolute;inset:0;width:100%;height:100%;display:block}
-.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:62%;pointer-events:none;background:linear-gradient(to top,color-mix(in srgb,var(--scene-bg) 92%,transparent) 8%,transparent)}
-.copy{position:absolute;z-index:2;left:clamp(16px,3vw,36px);right:clamp(16px,3vw,36px);bottom:calc(100px + env(safe-area-inset-bottom,0px));display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap}
-.copy .eyebrow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
-.copy h1{font-weight:900;font-size:clamp(31px,6.4vw,88px);letter-spacing:-.02em;line-height:1.12}
-.copy h1 em{font-style:normal;color:var(--mercari)}
-.copy .en{font-family:var(--display);font-weight:700;font-size:clamp(14px,1.5vw,18px);letter-spacing:.04em;margin-top:14px;color:var(--kraft-d)}
-.copy .side{max-width:23em;font-size:14.5px;color:var(--g1);display:grid;gap:16px;justify-items:start;background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:20px 22px;border-radius:12px}
-.copy .side .row{display:flex;gap:10px;flex-wrap:wrap}
-@media (max-width:640px){.copy{bottom:calc(86px + env(safe-area-inset-bottom,0px))}.copy .side{display:none}}
+/* ガラスパネル（発光する縁） */
+.glass{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:22px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.glow-edge::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;pointer-events:none;
+  background:conic-gradient(from var(--spin),transparent 0 62%,rgba(46,230,168,.9) 72%,transparent 82%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  animation:spin 6s linear infinite}
+@keyframes spin{to{--spin:360deg}}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 24px;border-radius:8px;font-weight:700;font-size:15px;text-decoration:none;white-space:nowrap;border:1.5px solid var(--ink);background:transparent;color:var(--ink);transition:transform .2s,background .2s,color .2s,box-shadow .2s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -12px var(--shadow)}
-.btn.solid{background:var(--ink);color:var(--on-ink)}
-.btn.red{background:var(--mercari);border-color:var(--mercari);color:#fff}
-.btn.sm{height:42px;padding:0 18px;font-size:14px}
-.btn .arr{transition:transform .2s}
-.btn:hover .arr{transform:translateX(3px)}
+/* 商品名のネオン点滅 */
+.neon{color:#fff;text-shadow:0 0 6px rgba(46,230,168,.55),0 0 18px rgba(18,163,122,.45);animation:flicker 7s infinite}
+.neon.d2{animation-delay:-2.3s}.neon.d3{animation-delay:-4.6s}
+@keyframes flicker{
+  0%,18%,22%,62%,64%,100%{opacity:1;text-shadow:0 0 6px rgba(46,230,168,.6),0 0 20px rgba(18,163,122,.5),0 0 42px rgba(18,163,122,.25)}
+  19%,21%{opacity:.55;text-shadow:none}
+  40%{text-shadow:0 0 4px rgba(46,230,168,.35),0 0 10px rgba(18,163,122,.25)}
+  63%{opacity:.75;text-shadow:0 0 2px rgba(46,230,168,.3)}}
 
-/* ---------- sections ---------- */
-section.block{padding-block:120px}
-.lab{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--kraft-d)}
-.lab::before{content:"";width:10px;height:10px;border-radius:2px;background:var(--kraft)}
-.head{display:grid;grid-template-columns:1fr 1fr;gap:24px 48px;align-items:end;margin-bottom:60px}
-.head .en{font-family:var(--display);font-weight:800;font-size:clamp(52px,8vw,112px);letter-spacing:-.02em;line-height:.95;margin-top:16px}
-.head h2{font-size:18px;font-weight:900;margin-top:14px}
-.head p{color:var(--g1);font-size:15px;max-width:30em;margin-top:8px}
-@media (max-width:760px){section.block{padding-block:80px}.head{grid-template-columns:1fr;margin-bottom:40px}}
-
-.card{background:var(--surface);border-radius:14px;box-shadow:0 30px 60px -36px var(--shadow)}
-
-/* problem */
-.pain{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
-.pain .big{font-size:clamp(26px,3.2vw,40px);font-weight:900;line-height:1.45;margin-top:22px}
-.pain .big s{text-decoration-color:var(--mercari);text-decoration-thickness:3px;color:var(--g2)}
-.pain p.sub{color:var(--g1);margin-top:20px;max-width:34em}
-.clock{padding:32px;display:grid;gap:20px}
-.clock .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--g2)}
-.bars{display:grid;gap:16px}
-.bar{display:grid;gap:6px;font-size:13.5px;font-weight:700}
-.bar .lbl{display:flex;justify-content:space-between}
-.bar .lbl span{font-family:var(--mono);font-size:12px;color:var(--g2);font-weight:500}
-.track{height:16px;border-radius:8px;background:var(--g4);overflow:hidden}
-.fill{display:block;height:100%;border-radius:8px}
-.fill.slow{background:repeating-linear-gradient(135deg,var(--g3) 0 8px,color-mix(in srgb,var(--g3) 70%,var(--surface)) 8px 16px)}
-.fill.fast{background:linear-gradient(90deg,var(--mercari),var(--yfrima))}
-.clock .note{font-size:12px;color:var(--g2)}
+/* 悩み */
+.pain{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.pain .big{font-size:clamp(28px,3.4vw,44px);font-weight:900;line-height:1.4}
+.pain .big span{color:var(--em-hi);text-shadow:0 0 18px var(--em-glow)}
+.pain p{color:var(--t2);margin-top:22px;max-width:30em}
+.meter{padding:30px}
+.meter .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--t3);text-transform:uppercase}
+.bar{margin-top:22px}
+.bar .lbl{display:flex;justify-content:space-between;font-size:14px;font-weight:700}
+.bar .lbl span{font-family:var(--mono);font-size:12.5px;color:var(--t3);font-weight:400}
+.bar .track{height:12px;border-radius:99px;background:rgba(255,255,255,.06);margin-top:10px;overflow:hidden}
+.bar .fill{height:100%;border-radius:inherit;width:0;transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.bar.slow .fill{background:linear-gradient(90deg,#5b5e66,#8b8f99)}
+.bar.fast .fill{background:linear-gradient(90deg,var(--em),var(--em-hi));box-shadow:0 0 14px var(--em-glow)}
+.in .bar.slow .fill{width:100%}
+.in .bar.fast .fill{width:6%}
+.meter small{display:block;color:var(--t3);font-size:12px;margin-top:22px;line-height:1.7}
 @media (max-width:860px){.pain{grid-template-columns:1fr}}
 
-/* tools */
-.tool{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;padding-block:64px;border-top:1px solid var(--g3)}
-.tool:first-of-type{border-top:0;padding-top:0}
-.tool.rev .art{order:2}
-.meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.badge{font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:3px 10px;border-radius:999px;border:1px solid var(--g3);color:var(--g1);background:var(--surface)}
-.badge.paid{background:var(--kraft-soft);border-color:transparent;color:var(--kraft-d)}
-.badge.free{background:var(--ok-soft);border-color:transparent;color:var(--ok)}
-.tool .name{display:flex;align-items:center;gap:14px;margin-top:16px}
-.tool .name img{width:56px;height:56px;border-radius:12px;background:#fff;box-shadow:0 8px 20px -10px var(--shadow);flex:none}
-.tool h3{font-size:clamp(28px,3.4vw,42px);font-weight:900;letter-spacing:-.01em}
-.tool .desc{color:var(--g1);margin-top:14px;max-width:31em}
-.tool .plats{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
-.feats{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:16px}
-.feats li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
-.feats .n{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:15px;background:var(--kraft-soft);color:var(--kraft-d)}
-.feats b{display:block;font-size:16px}
-.feats span span{display:block;font-size:13.5px;color:var(--g2);line-height:1.7}
-.price{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-.plan{border:1px solid var(--g3);border-radius:10px;padding:10px 18px;background:var(--surface);min-width:0}
-.plan small{display:block;font-size:11.5px;color:var(--g2);font-weight:700}
-.plan b{font-family:var(--display);font-weight:800;font-size:28px;font-variant-numeric:tabular-nums}
-.plan b em{font-style:normal;font-family:var(--jp);font-size:13px;font-weight:500;color:var(--g2)}
-.trial{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;margin-top:14px;color:var(--ok)}
-.trial::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok)}
-.tool .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-@media (max-width:860px){.tool{grid-template-columns:1fr;gap:36px}.tool.rev .art{order:0}}
+/* ツール */
+.tools{display:grid;gap:28px}
+.tool{display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden;transform-style:preserve-3d;transform:perspective(1200px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.tool:hover{transition:transform .12s}
+.tool .vis{position:relative;padding:34px;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,rgba(18,163,122,.16),transparent 70%);border-right:1px solid var(--line);min-height:360px}
+.tool .vis img.shot{border-radius:14px;box-shadow:0 30px 60px -20px rgba(0,0,0,.8),0 0 0 1px var(--line-2);max-height:420px;width:auto;transform:translateZ(40px)}
+.tool .body{padding:40px 40px 36px}
+.tag{display:flex;flex-wrap:wrap;gap:8px}
+.tag span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:4px 10px;border-radius:6px;border:1px solid var(--line-2);color:var(--t2)}
+.tag span.new{color:#04150F;background:var(--em-hi);border-color:transparent;box-shadow:0 0 14px var(--em-glow);font-weight:600}
+.tool h3{display:flex;align-items:center;gap:14px;font-size:clamp(23px,2.4vw,30px);font-weight:900;line-height:1.3;margin-top:18px}
+.tool h3 img{width:46px;height:46px;border-radius:12px;flex:none;box-shadow:0 0 22px -4px var(--em-glow)}
+.tool .desc{color:var(--t2);font-size:15px;margin-top:12px}
+.feats{list-style:none;margin-top:22px;display:grid;gap:12px}
+.feats li{display:grid;grid-template-columns:30px 1fr;gap:12px;font-size:14px;color:var(--t2);line-height:1.7}
+.feats li b{display:block;color:var(--text);font-size:15px}
+.feats li i{font-style:normal;font-family:var(--mono);font-size:12px;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:var(--em-hi);background:var(--em-soft);border:1px solid rgba(18,163,122,.35)}
+.feats li.hot i{background:var(--em);color:#fff;box-shadow:0 0 14px var(--em-glow)}
+.price-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;margin-top:24px;font-family:var(--display)}
+.price-line b{font-size:26px;font-weight:700}
+.price-line span{color:var(--t3);font-size:13px;font-family:var(--sans)}
+.tool .cta{margin-top:22px}
+.note{font-size:12px;color:var(--t3);margin-top:16px;line-height:1.7}
+@media (max-width:900px){.tool{grid-template-columns:1fr}.tool .vis{border-right:0;border-bottom:1px solid var(--line);min-height:0}.tool .body{padding:28px 22px}}
 
-/* art: real screenshot / mockups */
-.art{min-width:0;perspective:1400px;position:relative}
-.tilt{transform:rotateY(var(--ty,-4deg)) rotateX(var(--tx,2deg));transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-.shot{position:relative;display:grid;place-items:center;padding:clamp(24px,5vw,56px);border-radius:20px;overflow:hidden;
-  background:radial-gradient(circle at 20% 15%,color-mix(in srgb,var(--rakuma) 22%,transparent),transparent 55%),radial-gradient(circle at 85% 80%,color-mix(in srgb,var(--mercari) 22%,transparent),transparent 55%),var(--kraft-soft)}
-.shot .popup{width:min(340px,100%);border-radius:14px;box-shadow:0 40px 70px -30px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.06)}
-.shot .ext{position:absolute;right:clamp(14px,3vw,30px);top:clamp(14px,3vw,30px);display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--g1);background:var(--glass);padding:6px 10px 6px 6px;border-radius:999px}
-.shot .ext img{width:24px;height:24px;border-radius:6px}
-.mock{padding:16px}
-.win{border:1px solid var(--g4);border-radius:10px;overflow:hidden;background:var(--paper)}
-.wbar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--g4);background:var(--surface)}
-.wbar i{width:10px;height:10px;border-radius:50%}
-.wbar i:nth-child(1){background:#FF5F57}.wbar i:nth-child(2){background:#FEBC2E}.wbar i:nth-child(3){background:#28C840}
-.wbar .url{margin-left:10px;flex:1;min-width:0;font-family:var(--mono);font-size:10.5px;color:var(--g2);background:var(--paper);border-radius:6px;padding:3px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.scroll-x{overflow-x:auto}
-.tbl{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
-.tbl th{font-size:10.5px;font-weight:700;color:var(--g2);text-align:left;padding:9px 10px;border-bottom:1px solid var(--g3);white-space:nowrap}
-.tbl td{padding:10px;border-bottom:1px solid var(--g4);white-space:nowrap;vertical-align:middle}
-.tbl td.n{font-family:var(--mono);font-size:11.5px;color:var(--g2)}
-.thumb{width:30px;height:30px;border-radius:6px;display:inline-block;vertical-align:middle;margin-right:8px}
-.dots{display:inline-flex;gap:4px}
-.dots i{width:10px;height:10px;border-radius:3px;background:var(--c)}
-.dots i.off{background:var(--g4)}
-.pill{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:999px}
-.pill.on{background:var(--ok-soft);color:var(--ok)}
-.pill.sold{background:color-mix(in srgb,var(--mercari) 14%,transparent);color:var(--mercari)}
-.soldbtn{display:inline-block;font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:6px;background:var(--mercari);color:#fff}
-.sample{font-family:var(--mono);font-size:10px;color:var(--g2);text-align:right;margin-top:10px;letter-spacing:.06em}
-.range{padding:18px;display:grid;gap:14px}
-.rbar{position:relative;height:10px;border-radius:5px;background:linear-gradient(90deg,var(--ok),var(--kraft),var(--mercari))}
-.rbar i{position:absolute;top:-6px;width:22px;height:22px;border-radius:50%;background:var(--surface);border:3px solid var(--ink);left:46%}
-.rrow{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}
-.rrow span{color:var(--g2);font-family:var(--jp);font-size:11px;display:block}
-.bignum{font-family:var(--display);font-weight:800;font-size:40px;text-align:center;color:var(--ink)}
-.bignum small{font-family:var(--jp);font-size:12px;color:var(--g2);font-weight:500;display:block}
-.listing{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 18px 18px}
-.listing div{aspect-ratio:1;border-radius:8px;position:relative;overflow:hidden}
-.listing span{position:absolute;left:6px;bottom:6px;font-family:var(--mono);font-size:10px;background:rgba(0,0,0,.6);color:#fff;padding:1px 6px;border-radius:4px}
+/* 管理アシストの画面イメージ */
+.dash{width:100%;max-width:440px;transform:translateZ(40px);border-radius:14px;overflow:hidden;background:#0F1115;border:1px solid var(--line-2);box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
+.dash .bar0{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--t3)}
+.dash .bar0 i{width:8px;height:8px;border-radius:50%;background:#333}
+.dash table{width:100%;border-collapse:collapse;font-size:12.5px}
+.dash th{font-weight:500;color:var(--t3);text-align:left;padding:10px 14px;font-size:11px;border-bottom:1px solid var(--line)}
+.dash td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.dash td small{display:block;font-family:var(--mono);font-size:10.5px;color:var(--t3)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:3px}
+.st{font-size:11px;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,.06);color:var(--t2);white-space:nowrap}
+.st.sold{color:var(--em-hi);background:var(--em-soft)}
+.sold-btn{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;background:var(--em);color:#fff;box-shadow:0 0 12px var(--em-glow);white-space:nowrap;animation:pulseBtn 2.4s ease-in-out infinite}
+@keyframes pulseBtn{50%{box-shadow:0 0 22px rgba(46,230,168,.9)}}
+.dash .cap{font-family:var(--mono);font-size:10px;color:var(--t3);padding:9px 14px;letter-spacing:.1em}
 
-/* pricing */
-.pricing{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.pcard{padding:32px;display:grid;gap:18px;align-content:start;position:relative;overflow:hidden}
-.pcard::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--bar)}
-.pcard .t{display:flex;align-items:center;gap:12px}
-.pcard .t img{width:44px;height:44px;border-radius:10px;background:#fff}
-.pcard .t .gl{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:var(--kraft-soft);color:var(--kraft-d);font-family:var(--display);font-weight:800}
-.pcard h3{font-size:22px;font-weight:900}
-.pcard .who{font-size:14px;color:var(--g1)}
-.pcard .p{display:flex;flex-wrap:wrap;gap:4px 24px;align-items:baseline}
-.pcard .p b{font-family:var(--display);font-weight:800;font-size:44px;font-variant-numeric:tabular-nums;line-height:1.1}
-.pcard .p em{font-style:normal;font-size:14px;color:var(--g2);font-weight:700}
-.pcard ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:14px}
-.pcard li{display:flex;gap:10px;align-items:baseline}
-.pcard li::before{content:"✓";font-weight:900;color:var(--ok);flex:none}
-.pcard li.no{color:var(--g2)}
-.pcard li.no::before{content:"―";color:var(--g3)}
-@media (max-width:820px){.pricing{grid-template-columns:1fr}}
+/* 価格比較の画面イメージ */
+.rsch{width:100%;max-width:400px;transform:translateZ(40px);padding:22px;border-radius:14px;background:#0F1115;border:1px solid var(--line-2)}
+.rsch .url{font-family:var(--mono);font-size:11px;color:var(--t3);padding:8px 12px;border-radius:8px;background:rgba(255,255,255,.04)}
+.rsch .avg{font-family:var(--display);font-size:42px;font-weight:700;margin-top:16px;text-shadow:0 0 22px var(--em-glow)}
+.rsch .avg small{font-size:13px;color:var(--t3);font-family:var(--sans);margin-left:8px}
+.rsch .row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.rsch .row div{padding:10px;border-radius:10px;background:rgba(255,255,255,.04);font-size:11px;color:var(--t3)}
+.rsch .row b{display:block;font-family:var(--display);font-size:16px;color:var(--text)}
+.spark{height:58px;margin-top:16px}
 
-/* matrix */
-.matrix{margin-top:22px;overflow-x:auto;border-radius:14px}
-.matrix table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px;background:var(--surface)}
-.matrix th,.matrix td{padding:15px 16px;text-align:center;border-bottom:1px solid var(--g4)}
-.matrix th{font-size:12px;color:var(--g2);font-weight:700;border-bottom-color:var(--g3)}
-.matrix td:first-child,.matrix th:first-child{text-align:left;font-weight:700;color:var(--ink)}
-.matrix tr:last-child td{border-bottom:0}
-.y{display:inline-block;width:20px;height:20px;border-radius:50%;background:var(--ok);position:relative;vertical-align:middle}
-.y::after{content:"";position:absolute;left:7px;top:3px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
-.dash{color:var(--g3);font-weight:700}
-.mnote{font-size:12.5px;color:var(--g2);margin-top:12px}
+/* 料金 */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.plan{padding:34px;display:flex;flex-direction:column}
+.plan h3{display:flex;align-items:center;gap:12px;font-size:21px;font-weight:900}
+.plan h3 img{width:38px;height:38px;border-radius:10px}
+.plan .for{color:var(--t3);font-size:13.5px;margin-top:6px}
+.plan .yen{display:flex;gap:28px;margin-top:22px;font-family:var(--display)}
+.plan .yen div{font-size:13px;color:var(--t3);font-family:var(--sans)}
+.plan .yen b{display:block;font-size:32px;font-weight:700;color:var(--text);font-family:var(--display);line-height:1.2}
+.plan .yen b small{font-size:14px;color:var(--t3);font-weight:400}
+.plan ul{list-style:none;margin:24px 0 28px;display:grid;gap:10px;font-size:14.5px;color:var(--t2)}
+.plan ul li{padding-left:26px;position:relative}
+.plan ul li::before{content:"";position:absolute;left:2px;top:.55em;width:12px;height:7px;border-left:2px solid var(--em-hi);border-bottom:2px solid var(--em-hi);transform:rotate(-45deg);filter:drop-shadow(0 0 4px var(--em-glow))}
+.plan .btn{margin-top:auto}
+@media (max-width:820px){.plans{grid-template-columns:1fr}}
+.matrix{margin-top:28px;padding:28px;overflow-x:auto}
+.matrix h4{font-size:15px;font-weight:900;margin-bottom:14px}
+.matrix table{width:100%;min-width:520px;border-collapse:collapse;font-size:14px}
+.matrix th,.matrix td{padding:12px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.matrix th{font-weight:500;color:var(--t3);font-size:12.5px}
+.matrix td:first-child,.matrix th:first-child{text-align:left;font-weight:700}
+.ok{color:var(--em-hi);text-shadow:0 0 8px var(--em-glow)}
+.na{color:var(--t3)}
 
-/* videos */
-.vids{display:grid;grid-template-columns:repeat(2,1fr);gap:36px}
-.vid{min-width:0}
-.frame{position:relative;aspect-ratio:16/9;overflow:hidden;display:block;width:100%;text-decoration:none;max-width:100%;border-radius:14px;box-shadow:0 30px 60px -34px var(--shadow)}
-.frame .poster{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:10px;background:var(--pbg)}
-.frame .poster b{font-family:var(--jp);font-weight:900;font-size:clamp(20px,2.8vw,30px);color:#fff;padding:0 24px;text-align:center;line-height:1.35}
-.frame .poster small{font-family:var(--display);font-weight:700;letter-spacing:.14em;font-size:12px;color:rgba(255,255,255,.75)}
-.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s}
-.frame:hover img{transform:scale(1.04)}
-.frame .play{position:absolute;left:20px;bottom:20px;height:44px;padding:0 18px 0 14px;border-radius:8px;background:#FF0033;color:#fff;display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:14px;box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
-.frame .play::before{content:"";border-left:11px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent}
-.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.vid h3{font-size:18px;font-weight:900;margin-top:18px}
-.vid p{font-size:14px;color:var(--g2);margin-top:4px}
-.more{margin-top:44px;display:flex;gap:12px;flex-wrap:wrap}
-@media (max-width:760px){.vids{grid-template-columns:1fr}}
+/* 動画 */
+.movies{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.movie{display:block;text-decoration:none;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.movie:hover{transform:translateY(-4px);box-shadow:0 20px 50px -20px var(--em-glow)}
+.movie .th{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000}
+.movie .th img{width:100%;height:100%;object-fit:cover;opacity:.85;transition:transform .6s,opacity .3s}
+.movie:hover .th img{transform:scale(1.05);opacity:1}
+.movie .th::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(8,9,12,.85))}
+.play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:66px;height:66px;border-radius:50%;display:grid;place-items:center;background:rgba(18,163,122,.85);box-shadow:0 0 0 8px rgba(18,163,122,.2),0 0 40px var(--em-glow);transition:transform .25s}
+.movie:hover .play{transform:translate(-50%,-50%) scale(1.1)}
+.play::before{content:"";margin-left:5px;border-left:18px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent}
+.movie .badge{position:absolute;left:14px;top:14px;z-index:2;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;padding:4px 9px;border-radius:6px;background:rgba(8,9,12,.75);border:1px solid var(--line-2)}
+.movie .badge.new{background:var(--em-hi);color:#04150F;border-color:transparent;font-weight:600}
+.movie .mt{padding:18px 22px 22px}
+.movie .mt b{display:block;font-size:16px;font-weight:900}
+.movie .mt span{font-size:13.5px;color:var(--t3)}
+.movies + .cta{justify-content:center}
+@media (max-width:760px){.movies{grid-template-columns:1fr}}
 
-/* steps */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;list-style:none;padding:0;margin:0;counter-reset:s}
-.steps li{counter-increment:s;padding:26px 24px;min-width:0;background:var(--surface);border-radius:14px;position:relative}
-.steps li::before{content:counter(s);display:grid;place-items:center;width:46px;height:46px;border-radius:12px;font-family:var(--display);font-weight:800;font-size:21px;color:#fff;background:var(--sc)}
-.steps li:nth-child(1){--sc:var(--kraft)}.steps li:nth-child(2){--sc:var(--ok)}.steps li:nth-child(3){--sc:var(--rakuma)}.steps li:nth-child(4){--sc:var(--mercari)}
-.steps h3{font-size:18px;font-weight:900;margin-top:16px}
-.steps p{font-size:14px;color:var(--g1);margin-top:8px}
-@media (max-width:900px){.steps{grid-template-columns:1fr 1fr}}
-@media (max-width:520px){.steps{grid-template-columns:1fr}}
+/* はじめ方 */
+.flow{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:f}
+.flow li{counter-increment:f;padding:28px 24px;position:relative}
+.flow li::before{content:"0" counter(f);font-family:var(--display);font-size:46px;font-weight:800;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(46,230,168,.75);text-shadow:0 0 18px rgba(18,163,122,.35)}
+.flow h3{font-size:16.5px;font-weight:900;margin-top:16px}
+.flow p{font-size:13.5px;color:var(--t2);margin-top:6px;line-height:1.75}
+@media (max-width:900px){.flow{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.flow{grid-template-columns:1fr}}
 
-/* faq */
-.faq{display:grid;gap:10px}
-.faq details{background:var(--surface);border-radius:12px}
-.faq summary{list-style:none;cursor:pointer;display:flex;gap:16px;align-items:center;padding:20px 22px;font-weight:700;font-size:16px}
+/* FAQ */
+.faq{display:grid;gap:12px;max-width:880px}
+.faq details{padding:0 26px;border-radius:16px}
+.faq summary{list-style:none;cursor:pointer;padding:22px 30px 22px 0;font-weight:700;font-size:15.5px;position:relative;display:flex;gap:14px}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary .q{font-family:var(--display);font-weight:800;font-size:20px;flex:none;color:var(--kraft)}
-.faq summary .pm{margin-left:auto;flex:none;width:30px;height:30px;border-radius:50%;background:var(--g4);position:relative}
-.faq summary .pm::before,.faq summary .pm::after{content:"";position:absolute;left:9px;right:9px;top:14px;height:2px;background:var(--ink)}
-.faq summary .pm::after{transform:rotate(90deg);transition:transform .2s}
-.faq details[open] .pm::after{transform:rotate(0)}
-.faq .a{padding:0 22px 22px 58px;color:var(--g1);font-size:15px;max-width:48em}
+.faq summary::before{content:"Q";font-family:var(--display);color:var(--em-hi);font-weight:700;text-shadow:0 0 10px var(--em-glow)}
+.faq summary::after{content:"";position:absolute;right:4px;top:50%;width:10px;height:10px;border-right:2px solid var(--t3);border-bottom:2px solid var(--t3);transform:translateY(-70%) rotate(45deg);transition:transform .3s}
+.faq details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
+.faq details p{padding:0 0 24px 28px;color:var(--t2);font-size:14.5px}
 
-/* contact */
-.contact{background:#1A1F2C;color:#F2EEE7;border-radius:20px;padding:clamp(32px,6vw,80px);display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:center;position:relative;overflow:hidden}
-.contact::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(560px 300px at 90% 0%,rgba(234,53,45,.28),transparent 70%),radial-gradient(500px 300px at 0% 100%,rgba(37,99,235,.22),transparent 70%)}
-.contact .lab{color:#E8BE87}
-.contact .lab::before{background:#D3A46B}
-.contact .en{font-family:var(--display);font-weight:800;font-size:clamp(52px,7vw,104px);letter-spacing:-.02em;line-height:.95;margin-top:16px;position:relative}
-.contact p{margin-top:18px;color:#CFCAC2;max-width:26em;position:relative}
-.contact .reply{font-size:12.5px;color:#9A968F;margin-top:14px}
-.cards{display:grid;gap:10px;position:relative}
-.cc{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);text-decoration:none;color:#F2EEE7;min-width:0;transition:border-color .2s,background .2s}
-.cc:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.10)}
-.cc b{display:block;font-size:15px}
-.cc small{display:block;font-family:var(--mono);font-size:12.5px;color:#9A968F;word-break:break-all}
-.cc .ic{flex:none;width:44px;height:44px;border-radius:10px;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:12.5px;color:#fff;background:var(--ic)}
-.cc .go{margin-left:auto;flex:none;color:#9A968F}
+/* MONON */
+.universe{display:grid;grid-template-columns:.9fr 1.1fr;align-items:center;gap:0;overflow:hidden;text-decoration:none;transition:box-shadow .3s}
+.universe:hover{box-shadow:0 30px 80px -30px rgba(255,255,255,.25)}
+.universe .stage{position:relative;min-height:380px;display:grid;place-items:center;background:
+  radial-gradient(circle at 50% 55%,rgba(255,255,255,.12),transparent 60%),#0B0C0F;overflow:hidden}
+.stars{position:absolute;inset:0;background-image:
+  radial-gradient(1.5px 1.5px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 70% 20%,#fff,transparent),
+  radial-gradient(1px 1px at 40% 80%,#fff,transparent),radial-gradient(1.5px 1.5px at 85% 65%,#fff,transparent),
+  radial-gradient(1px 1px at 10% 70%,#fff,transparent),radial-gradient(1px 1px at 55% 45%,rgba(255,255,255,.7),transparent),
+  radial-gradient(1px 1px at 92% 35%,#fff,transparent),radial-gradient(1px 1px at 30% 12%,rgba(255,255,255,.6),transparent);
+  animation:twinkle 4s ease-in-out infinite alternate}
+@keyframes twinkle{to{opacity:.4}}
+.monon-svg{width:200px;position:relative;z-index:1;animation:float 5s ease-in-out infinite;filter:drop-shadow(0 30px 30px rgba(0,0,0,.6))}
+@keyframes float{50%{transform:translateY(-14px) rotate(-2deg)}}
+.monon-svg .ball{animation:ballGlow 2.2s ease-in-out infinite}
+@keyframes ballGlow{50%{filter:drop-shadow(0 0 10px #fff)}}
+.bubble{position:absolute;z-index:2;right:14%;top:20%;background:#fff;color:#111;font-weight:900;font-size:18px;padding:8px 16px;border-radius:16px;animation:pop 4s ease-in-out infinite}
+.bubble::after{content:"";position:absolute;left:14px;bottom:-8px;border-left:8px solid transparent;border-right:8px solid transparent;border-top:10px solid #fff}
+@keyframes pop{0%,60%,100%{transform:scale(1)}65%{transform:scale(1.12)}70%{transform:scale(.96)}}
+.universe .body{padding:44px}
+.universe .body .eyebrow{color:#fff}
+.universe .body .eyebrow::before{background:#fff;box-shadow:0 0 8px #fff}
+.universe h3{font-family:var(--display);font-size:clamp(44px,6vw,72px);font-weight:800;letter-spacing:-.02em;line-height:1;margin-top:16px;color:#fff;text-shadow:0 0 30px rgba(255,255,255,.35)}
+.universe h3 small{display:block;font-family:var(--sans);font-size:15px;font-weight:700;color:var(--t2);letter-spacing:.1em;margin-top:10px;text-shadow:none}
+.universe p{color:var(--t2);margin-top:16px;font-size:15px;max-width:28em}
+.universe .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.universe .chips span{font-size:12.5px;font-weight:700;padding:5px 12px;border-radius:999px;border:1px solid var(--line-2);color:var(--t2)}
+.universe .go{display:inline-flex;align-items:center;gap:10px;margin-top:26px;font-weight:700;border-bottom:1px solid #fff;padding-bottom:4px}
+@media (max-width:860px){.universe{grid-template-columns:1fr}.universe .body{padding:28px 22px}.universe .stage{min-height:300px}}
+
+/* 問い合わせ */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.contact p{color:var(--t2)}
+.contact .links{display:grid;gap:12px}
+.contact .links a{display:flex;align-items:center;gap:16px;padding:18px 22px;text-decoration:none;transition:border-color .2s,transform .2s}
+.contact .links a:hover{border-color:var(--em);transform:translateX(4px)}
+.contact .links .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex:none;font-family:var(--display);font-weight:700;font-size:13px;background:var(--em-soft);color:var(--em-hi);border:1px solid rgba(18,163,122,.35)}
+.contact .links b{display:block;font-size:15px}
+.contact .links small{color:var(--t3);font-size:12.5px}
+.contact .links .arr{margin-left:auto;color:var(--t3)}
 @media (max-width:820px){.contact{grid-template-columns:1fr}}
 
-footer{padding-block:56px calc(120px + env(safe-area-inset-bottom,0px));color:var(--g2);font-size:13px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center}
-footer a{text-decoration:none}
-footer a:hover{color:var(--ink)}
-footer .logo img{width:32px;height:32px}
-footer .logo b{font-size:16px}
-footer .copy-r{margin-left:auto;font-family:var(--display);font-size:13px;letter-spacing:.04em}
+footer{border-top:1px solid var(--line);padding:40px 0 calc(40px + env(safe-area-inset-bottom));margin-top:40px}
+footer .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px}
+footer nav a{color:var(--t2);text-decoration:none}
+footer nav a:hover{color:var(--em-hi)}
+footer small{margin-left:auto;color:var(--t3);font-family:var(--mono);font-size:11.5px}
 
-.rv{transition:transform 1s cubic-bezier(.2,.7,.2,1),opacity 1s}
-.js .rv.pre{transform:translateY(32px);opacity:.001}
+/* 動きを止める */
+:root[data-motion="off"] *, :root[data-motion="off"] *::before, :root[data-motion="off"] *::after{animation:none!important;transition:none!important}
+:root[data-motion="off"] .reveal{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
   html{scroll-behavior:auto}
-  .grain{animation:none}
-  .js .rv.pre{transform:none;opacity:1}
-  .tilt,.frame img,.btn{transition:none}
 }
 </style>
 </head>
 <body>
-<div class="grain" aria-hidden="true"></div>
+<div class="bg" aria-hidden="true"></div>
 
-<div class="top">
-  <a class="logo" href="#top" aria-label="niche-hobby トップへ">
-    <img src="images/icon-pro.png" alt="" width="44" height="44">
-    <span><b>niche-hobby</b><small>Chrome Extensions for Flea-Market Sellers</small></span>
+<header class="top">
+  <a class="brand" href="#top" aria-label="niche hobby トップへ">
+    <svg viewBox="0 0 120 96" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" aria-hidden="true">
+      <path class="mk-n" d="M14 86V48Q14 34 37 34Q60 34 60 48"/>
+      <path class="mk-h" d="M60 10V86M60 48Q60 34 83 34Q106 34 106 48V86"/>
+    </svg>
+    <b>niche <span>hobby</span></b>
   </a>
-  <div class="where" aria-hidden="true">Japan<br><span id="clock">----/--/-- --:--:-- GMT +9</span></div>
-  <div class="ctrl">
-    <button class="chipbtn motion" id="motion" type="button" aria-pressed="true"><span class="lbl">Motion</span><span class="ring" aria-hidden="true"></span></button>
-    <div class="seg" role="group" aria-label="表示テーマ">
-      <button type="button" id="th-light" aria-pressed="false">Light</button>
-      <button type="button" id="th-dark" aria-pressed="false">Dark</button>
-    </div>
-    <a class="chipbtn cta" href="#contact">Contact</a>
-  </div>
-</div>
+  <nav class="nav" aria-label="ページ内メニュー">
+    <a href="#why">お悩み</a>
+    <a href="#tools">ツール</a>
+    <a href="#price">料金</a>
+    <a href="#movie">動画</a>
+    <a href="#flow">はじめ方</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">お問い合わせ</a>
+    <a class="monon-link" href="monon/">MONON</a>
+  </nav>
+  <button class="motion" id="motionBtn" type="button" aria-label="アニメーションを止める" title="アニメーションの切り替え">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6v12M15 6v12"/></svg>
+  </button>
+</header>
 
-<nav class="tabs" aria-label="ページ内メニュー">
-  <a href="#top" class="on">ホーム</a>
-  <a href="#why">お悩み</a>
-  <a href="#tools">ツール</a>
-  <a href="#price">料金</a>
-  <a href="#movie">動画</a>
-  <a href="#flow">はじめ方</a>
-  <a href="#faq">FAQ</a>
-  <a href="#contact">お問い合わせ</a>
-</nav>
-
-<main>
-  <header class="hero" id="top">
-    <canvas id="gl" aria-hidden="true"></canvas>
-    <div class="copy">
-      <div>
-        <div class="eyebrow"><span class="mk m">メルカリ</span><span class="mk r">ラクマ</span><span class="mk f">Yahoo!フリマ</span><span class="mk a">ヤフオク</span></div>
-        <h1>出品は<em>1回</em>。<br>あとはワンクリック。</h1>
-        <p class="en">List once. Sell on four marketplaces.</p>
-      </div>
-      <div class="side">
-        <p>メルカリに出品したら、ラクマ・Yahoo!フリマ・ヤフオクにも転記。売れたら他サイトの出品をまとめて削除。フリマせどりの出品作業を、Chrome拡張機能で短くします。</p>
-        <div class="row">
-          <a class="btn red sm" href="#tools">ツールを見る <span class="arr">→</span></a>
-          <a class="btn sm" href="#movie">動画</a>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <section class="block" id="why">
+<main id="top">
+  <!-- ヒーロー -->
+  <section class="hero">
+    <canvas id="scene" aria-hidden="true"></canvas>
     <div class="wrap">
-      <div class="pain rv">
-        <div>
-          <p class="lab">Problem</p>
-          <p class="big">同じ商品を、<br>何度も入力しない。</p>
-          <p class="sub">メルカリに出したあと、ラクマにもコピペ。写真を1枚ずつ保存して、また1枚ずつアップロード。ヤフオクでも同じ作業をもう一度。1商品10〜15分かかる作業が、50商品あれば8時間以上になります。売れたあとに他サイトの削除を忘れて、二重売りになることも。</p>
+      <div class="copy">
+        <div class="markets">
+          <span class="mk m"><i></i>メルカリ</span>
+          <span class="mk r"><i></i>ラクマ</span>
+          <span class="mk y"><i></i>Yahoo!フリマ</span>
+          <span class="mk a"><i></i>ヤフオク</span>
         </div>
-        <div class="card clock">
-          <p class="k">1商品あたりの転記作業（イメージ）</p>
-          <div class="bars">
-            <div class="bar"><div class="lbl">手作業でコピペ<span>10〜15分</span></div><div class="track"><span class="fill slow" style="width:100%"></span></div></div>
-            <div class="bar"><div class="lbl">拡張機能でワンクリック<span>ボタンを押すだけ</span></div><div class="track"><span class="fill fast" style="width:16%"></span></div></div>
-          </div>
-          <p class="note">カテゴリ・配送方法など一部の項目は、各サイトの仕様で手動選択が必要です。</p>
+        <div class="eyebrow">Chrome Extensions for Flea-Market Sellers</div>
+        <h1>出品は<em>1回</em>。<br><span style="white-space:nowrap">あとはワンクリック。</span></h1>
+        <div class="en">List once. Sell on four marketplaces.</div>
+        <p class="lead">メルカリに出品したら、ラクマ・Yahoo!フリマ・ヤフオクにも転記。カテゴリやブランドもほぼ自動で入り、売れたら他サイトの削除まで案内します。フリマせどりの出品作業を、Chrome拡張機能で短くします。</p>
+        <div class="cta">
+          <a class="btn pri" href="#tools">ツールを見る →</a>
+          <a class="btn" href="#movie">動画で見る</a>
         </div>
+      </div>
+    </div>
+    <div class="hud" aria-hidden="true">SYSTEM <b>ONLINE</b><br>MARKETS <b>04</b><br>JST <b id="clock">--:--:--</b></div>
+    <div class="scroll-hint" aria-hidden="true">SCROLL</div>
+  </section>
+
+  <!-- 悩み -->
+  <section id="why">
+    <div class="wrap pain">
+      <div class="reveal">
+        <div class="eyebrow">Problem</div>
+        <div class="big">同じ商品を、<br><span>何度も入力しない。</span></div>
+        <p>メルカリに出したあと、ラクマにもコピペ。写真を1枚ずつ保存して、また1枚ずつアップロード。ヤフオクでも同じ作業をもう一度。1商品10〜15分かかる作業が、50商品あれば8時間以上になります。売れたあとに他サイトの削除を忘れて、二重売りになることも。</p>
+      </div>
+      <div class="glass glow-edge meter reveal">
+        <div class="k">1商品あたりの転記作業（イメージ）</div>
+        <div class="bar slow"><div class="lbl">手作業でコピペ<span>10〜15分</span></div><div class="track"><div class="fill"></div></div></div>
+        <div class="bar fast"><div class="lbl">拡張機能でワンクリック<span>ボタンを押すだけ</span></div><div class="track"><div class="fill"></div></div></div>
+        <small>配送方法など一部の項目は、各サイトの仕様で手動選択が必要です。</small>
       </div>
     </div>
   </section>
 
-  <section class="block" id="tools" style="padding-top:0">
+  <!-- ツール -->
+  <section id="tools">
     <div class="wrap">
-      <div class="head rv">
-        <div><p class="lab">Tools</p><p class="en">Our Tools</p></div>
-        <div><h2>ツール</h2><p>出品する、管理する、調べる。フリマせどりの手間がかかるところを、1つずつ道具にしています。</p></div>
+      <div class="head reveal">
+        <div class="eyebrow">Tools</div>
+        <div class="en">Our Tools</div>
+        <h2>ツール</h2>
+        <p>出品する、管理する、調べる。フリマせどりの手間がかかるところを、1つずつ道具にしています。</p>
       </div>
 
-      <article class="tool rv">
-        <div class="art">
-          <div class="shot tilt">
-            <span class="ext"><img src="images/icon-pro.png" alt="">Chrome 拡張機能</span>
-            <img class="popup" src="images/pro-popup.jpg" width="720" height="1416" alt="フリマ出品アシスト Pro のポップアップ画面。メルカリ保存、ラクマ・Yahoo!フリマ・Yahoo!オークションへの入力ボタン、画像ダウンロード、定型文の機能が並んでいる">
+      <div class="tools">
+        <!-- Pro -->
+        <article class="glass glow-edge tool tilt reveal">
+          <div class="vis">
+            <img class="shot" src="images/pro-popup.jpg" alt="フリマ出品アシスト Pro のポップアップ画面。メルカリ保存、ラクマ・Yahoo!フリマ・ヤフオクへの入力ボタン、画像ダウンロード、定型文の機能が並んでいる" loading="lazy">
           </div>
-        </div>
-        <div>
-          <div class="meta"><span class="badge paid">有料</span><span class="badge">転記</span><span class="badge free">7日間無料</span></div>
-          <div class="name"><img src="images/icon-pro.png" alt=""><h3>フリマ出品アシスト Pro</h3></div>
-          <p class="desc">メルカリの商品ページで保存して、ボタンを押すだけ。ラクマ・Yahoo!フリマ・ヤフオクの出品ページに、出品情報が入ります。</p>
-          <div class="plats"><span class="mk m">保存元：メルカリ</span><span class="mk r">ラクマ</span><span class="mk f">Yahoo!フリマ</span><span class="mk a">ヤフオク</span></div>
-          <ul class="feats">
-            <li><span class="n">1</span><span><b>ワンクリックで出品情報を入力</b><span>画像あり・なしも切り替えられます。</span></span></li>
-            <li><span class="n">2</span><span><b>商品画像をまとめてダウンロード</b><span>商品名のフォルダに保存、またはZIPで保存。</span></span></li>
-            <li><span class="n">3</span><span><b>コメント・取引メッセージの定型文</b><span>入力欄を開いて「入力」を押すだけ（送信はされません）。</span></span></li>
-          </ul>
-          <div class="price">
-            <div class="plan"><small>月額プラン</small><b>¥690<em> / 月</em></b></div>
-            <div class="plan"><small>年額プラン</small><b>¥5,900<em> / 年</em></b></div>
-          </div>
-          <p class="trial">7日間の無料トライアルつき</p>
-          <div class="ctas">
-            <a class="btn red" href="https://fuukazin.gumroad.com/l/rswvg" target="_blank" rel="noopener">購入ページへ <span class="arr">→</span></a>
-            <a class="btn" href="https://youtu.be/Bepfbzw6eQc" target="_blank" rel="noopener">デモ動画</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="tool rev rv">
-        <div class="art" aria-hidden="true">
-          <div class="card mock tilt">
-            <div class="win">
-              <div class="wbar"><i></i><i></i><i></i><span class="url">フリマ管理アシスト ― 商品管理</span></div>
-              <div class="scroll-x">
-                <table class="tbl">
-                  <thead><tr><th>商品</th><th>出品先</th><th>状態</th><th></th></tr></thead>
-                  <tbody>
-                    <tr><td><span class="thumb" style="background:linear-gradient(135deg,#8B5A2B,#C79A6B)"></span>ショルダーバッグ<br><span class="n" style="font-family:var(--mono);font-size:10.5px;color:var(--g2)">A-0128</span></td><td><span class="dots"><i style="--c:var(--mercari)"></i><i class="off"></i><i class="off"></i></span></td><td><span class="pill sold">売却済</span></td><td style="font-size:11px;color:var(--g2)">他サイト削除済</td></tr>
-                    <tr><td><span class="thumb" style="background:linear-gradient(135deg,#3E6E8E,#A8C7DA)"></span>レトロ食器 5点<br><span class="n" style="font-family:var(--mono);font-size:10.5px;color:var(--g2)">A-0129</span></td><td><span class="dots"><i style="--c:var(--mercari)"></i><i style="--c:var(--rakuma)"></i><i style="--c:var(--yauc)"></i></span></td><td><span class="pill on">出品中</span></td><td><span class="soldbtn">売れた！</span></td></tr>
-                    <tr><td><span class="thumb" style="background:linear-gradient(135deg,#6B4E3D,#D8C3A5)"></span>古書 まとめ<br><span class="n" style="font-family:var(--mono);font-size:10.5px;color:var(--g2)">A-0130</span></td><td><span class="dots"><i style="--c:var(--mercari)"></i><i style="--c:var(--rakuma)"></i><i style="--c:var(--yfrima)"></i></span></td><td><span class="pill on">出品中</span></td><td><span class="soldbtn">売れた！</span></td></tr>
-                  </tbody>
-                </table>
-              </div>
+          <div class="body">
+            <div class="tag"><span class="new">NEW v4.5</span><span>有料</span><span>7日間無料</span></div>
+            <h3><img src="images/icon-pro.png" alt=""><span class="neon">フリマ出品アシスト Pro</span></h3>
+            <p class="desc">メルカリの商品ページで保存して、ボタンを押すだけ。ラクマ・Yahoo!フリマ・ヤフオクの出品ページに、出品情報が入ります。</p>
+            <ul class="feats">
+              <li><i>01</i><div><b>ワンクリックで出品情報を入力</b>カテゴリ・ブランドもほぼ自動で選択。画像あり・なしも切り替えられます。</div></li>
+              <li class="hot"><i>02</i><div><b>売れたら、他サイトの削除ボタンまで案内</b>売れた商品を他サイトで探して、削除ボタンの前まで自動で進みます。最後の確定はご自身で。</div></li>
+              <li class="hot"><i>03</i><div><b>全サイトの値下げ・値上げ</b>各サイトの編集ページに新しい価格を入力。保存ボタンを押すだけです。</div></li>
+              <li><i>04</i><div><b>商品画像をまとめてダウンロード</b>商品名のフォルダに保存、またはZIPで保存。</div></li>
+              <li><i>05</i><div><b>コメント・取引メッセージの定型文</b>入力欄を開いて「入力」を押すだけ（送信はされません）。</div></li>
+            </ul>
+            <div class="price-line"><b>¥690</b><span>/ 月</span><b>¥5,900</b><span>/ 年</span></div>
+            <div class="cta">
+              <a class="btn pri sm" href="https://fuukazin.gumroad.com/l/rswvg" target="_blank" rel="noopener">7日間無料で試す →</a>
+              <a class="btn sm" href="https://youtu.be/Z4R7eHCR2OY" target="_blank" rel="noopener">新機能の動画</a>
             </div>
-            <p class="sample">SAMPLE DATA ／ 画面イメージ</p>
           </div>
-        </div>
-        <div>
-          <div class="meta"><span class="badge paid">有料</span><span class="badge">転記＋管理</span><span class="badge free">7日間無料</span></div>
-          <div class="name"><img src="images/icon-kanri.png" alt=""><h3>フリマ管理アシスト</h3></div>
-          <p class="desc">転記から在庫の管理、売れたあとの削除まで。複数のフリマを掛け持ちする人のための、出品作業まるごと効率化ツールです。</p>
-          <ul class="feats">
-            <li><span class="n">1</span><span><b>ワンクリック転記</b><span>タイトル・価格・説明文・商品の状態・画像を、各サイトの入力フォームに自動入力。画像はラクマ・Yahoo!フリマに最大20枚、ヤフオクに最大10枚。</span></span></li>
-            <li><span class="n">2</span><span><b>商品管理DB</b><span>取得した商品を管理番号で保存。呼び出すだけで再出品や価格変更ができます。</span></span></li>
-            <li><span class="n">3</span><span><b>「売れた！」ボタンで一括削除</b><span>他サイトの出品をまとめて削除し、二重売りを防ぎます。</span></span></li>
-          </ul>
-          <div class="price">
-            <div class="plan"><small>月額プラン</small><b>¥690<em> / 月</em></b></div>
-            <div class="plan"><small>年額プラン（約2ヶ月分お得）</small><b>¥5,900<em> / 年</em></b></div>
-          </div>
-          <p class="trial">7日間の無料トライアル（クレジットカード不要）</p>
-          <div class="ctas">
-            <a class="btn red" href="https://fuukazin.gumroad.com/l/hnpwm" target="_blank" rel="noopener">購入ページへ <span class="arr">→</span></a>
-            <a class="btn" href="https://youtu.be/89o7kxexUT4" target="_blank" rel="noopener">デモ動画</a>
-          </div>
-        </div>
-      </article>
+        </article>
 
-      <article class="tool rv">
-        <div class="art" aria-hidden="true">
-          <div class="card mock tilt">
-            <div class="win">
-              <div class="wbar"><i></i><i></i><i></i><span class="url">jp.mercari.com/search?keyword=…</span></div>
-              <div class="range">
-                <p class="bignum">¥3,200<small>相場の目安</small></p>
-                <div class="rbar"><i></i></div>
-                <div class="rrow"><div><span>最安</span>¥1,500</div><div><span>平均</span>¥3,200</div><div><span>最高</span>¥6,800</div></div>
-              </div>
-              <div class="listing">
-                <div style="background:linear-gradient(135deg,#7A4B2A,#D9A877)"><span>¥2,980</span></div>
-                <div style="background:linear-gradient(135deg,#2F4858,#8FB3C4)"><span>¥3,500</span></div>
-                <div style="background:linear-gradient(135deg,#5B5F3A,#C9C58D)"><span>¥1,500</span></div>
-                <div style="background:linear-gradient(135deg,#6D2E46,#D79AB0)"><span>¥6,800</span></div>
-              </div>
+        <!-- 管理アシスト -->
+        <article class="glass tool tilt reveal">
+          <div class="vis">
+            <div class="dash" aria-label="フリマ管理アシストの商品管理画面のイメージ">
+              <div class="bar0"><i></i><i></i><i></i>&nbsp;フリマ管理アシスト ― 商品管理</div>
+              <table>
+                <thead><tr><th>商品</th><th>出品先</th><th>状態</th><th></th></tr></thead>
+                <tbody>
+                  <tr><td>ショルダーバッグ<small>A-0128</small></td><td><span class="dot" style="background:var(--mercari)"></span><span class="dot" style="background:var(--rakuma)"></span><span class="dot" style="background:var(--yfrima)"></span></td><td><span class="st sold">売却済</span></td><td><span class="st">他サイト削除済</span></td></tr>
+                  <tr><td>レトロ食器 5点<small>A-0129</small></td><td><span class="dot" style="background:var(--mercari)"></span><span class="dot" style="background:var(--rakuma)"></span><span class="dot" style="background:var(--yauc)"></span></td><td><span class="st">出品中</span></td><td><span class="sold-btn">売れた！</span></td></tr>
+                  <tr><td>古書 まとめ<small>A-0130</small></td><td><span class="dot" style="background:var(--mercari)"></span><span class="dot" style="background:var(--yfrima)"></span></td><td><span class="st">出品中</span></td><td><span class="sold-btn" style="animation-delay:-1.2s">売れた！</span></td></tr>
+                </tbody>
+              </table>
+              <div class="cap">SAMPLE DATA ／ 画面イメージ</div>
             </div>
-            <p class="sample">SAMPLE DATA ／ 画面イメージ</p>
           </div>
-        </div>
-        <div>
-          <div class="meta"><span class="badge free">無料</span><span class="badge">価格リサーチ</span></div>
-          <div class="name"><span style="width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:var(--ok-soft);color:var(--ok);font-family:var(--display);font-weight:800;font-size:22px;flex:none">¥</span><h3>メルカリ価格比較アシスト</h3></div>
-          <p class="desc">仕入れや値付けの前に、メルカリの相場をすばやく確認。手作業で15分かかっていた価格リサーチを、5秒にします。</p>
-          <div class="ctas">
-            <a class="btn solid" href="https://chromewebstore.google.com/detail/jdbdnhlllebiifeplcfbchmflbgjgaod" target="_blank" rel="noopener">Chromeに追加（無料） <span class="arr">→</span></a>
+          <div class="body">
+            <div class="tag"><span>有料</span><span>転記＋管理</span><span>7日間無料</span></div>
+            <h3><img src="images/icon-kanri.png" alt=""><span class="neon d2">フリマ管理アシスト</span></h3>
+            <p class="desc">転記から在庫の管理、売れたあとの削除まで。複数のフリマを掛け持ちする人のための、出品作業まるごと効率化ツールです。</p>
+            <ul class="feats">
+              <li><i>01</i><div><b>ワンクリック転記</b>タイトル・価格・説明文・商品の状態・画像に加えて、カテゴリ・ブランドも自動入力。画像はラクマ・Yahoo!フリマに最大20枚、ヤフオクに最大10枚。</div></li>
+              <li><i>02</i><div><b>商品管理DB</b>取得した商品を管理番号で保存。呼び出すだけで再出品や価格変更ができます。</div></li>
+              <li class="hot"><i>03</i><div><b>「売れた！」ボタンで一括削除</b>他サイトの出品をまとめて削除し、二重売りを防ぎます。</div></li>
+            </ul>
+            <div class="price-line"><b>¥690</b><span>/ 月</span><b>¥5,900</b><span>/ 年（約2ヶ月分お得）</span></div>
+            <div class="cta">
+              <a class="btn pri sm" href="https://fuukazin.gumroad.com/l/hnpwm" target="_blank" rel="noopener">7日間無料で試す →</a>
+              <a class="btn sm" href="https://youtu.be/9zyZ_JSLr0o" target="_blank" rel="noopener">紹介動画</a>
+            </div>
+            <p class="note">トライアルはクレジットカード不要です。</p>
           </div>
-        </div>
-      </article>
+        </article>
+
+        <!-- 価格比較 -->
+        <article class="glass tool tilt reveal">
+          <div class="vis">
+            <div class="rsch" aria-label="メルカリ価格比較アシストの画面イメージ">
+              <div class="url">jp.mercari.com/search?keyword=…</div>
+              <div class="avg">¥3,200<small>相場の目安</small></div>
+              <svg class="spark" viewBox="0 0 300 58" preserveAspectRatio="none" aria-hidden="true">
+                <defs><linearGradient id="sg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2EE6A8" stop-opacity=".45"/><stop offset="1" stop-color="#2EE6A8" stop-opacity="0"/></linearGradient></defs>
+                <path d="M0 44 L30 38 L60 46 L90 30 L120 34 L150 20 L180 28 L210 14 L240 24 L270 10 L300 18 V58 H0Z" fill="url(#sg)"/>
+                <path d="M0 44 L30 38 L60 46 L90 30 L120 34 L150 20 L180 28 L210 14 L240 24 L270 10 L300 18" fill="none" stroke="#2EE6A8" stroke-width="2"/>
+              </svg>
+              <div class="row"><div>最安<b>¥1,500</b></div><div>平均<b>¥3,200</b></div><div>最高<b>¥6,800</b></div></div>
+              <div class="cap" style="font-family:var(--mono);font-size:10px;color:var(--t3);margin-top:12px;letter-spacing:.1em">SAMPLE DATA ／ 画面イメージ</div>
+            </div>
+          </div>
+          <div class="body">
+            <div class="tag"><span class="new">無料</span><span>価格リサーチ</span></div>
+            <h3><span class="neon d3">メルカリ価格比較アシスト</span></h3>
+            <p class="desc">仕入れや値付けの前に、メルカリの相場をすばやく確認。手作業で15分かかっていた価格リサーチを、5秒にします。</p>
+            <div class="cta">
+              <a class="btn pri sm" href="https://chromewebstore.google.com/detail/jdbdnhlllebiifeplcfbchmflbgjgaod" target="_blank" rel="noopener">Chromeに追加（無料） →</a>
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
-  <section class="block" id="price" style="padding-top:0">
+  <!-- 料金 -->
+  <section id="price">
     <div class="wrap">
-      <div class="head rv">
-        <div><p class="lab">Price</p><p class="en">Pricing</p></div>
-        <div><h2>料金</h2><p>どちらも同じ料金です。まずは7日間の無料トライアルで試せます。</p></div>
+      <div class="head reveal">
+        <div class="eyebrow">Price</div>
+        <div class="en">Pricing</div>
+        <h2>料金</h2>
+        <p>どちらも同じ料金です。まずは7日間の無料トライアルで試せます。トライアル後に自動で課金されることはありません。</p>
       </div>
-      <div class="pricing rv">
-        <div class="card pcard" style="--bar:linear-gradient(90deg,var(--mercari),var(--yfrima))">
-          <div class="t"><img src="images/icon-pro.png" alt=""><h3>フリマ出品アシスト Pro</h3></div>
-          <p class="who">転記だけできれば十分な人に</p>
-          <div class="p"><div><b>¥690</b><em> / 月</em></div><div><b>¥5,900</b><em> / 年</em></div></div>
+      <div class="plans">
+        <div class="glass glow-edge plan reveal">
+          <h3><img src="images/icon-pro.png" alt=""><span class="neon">フリマ出品アシスト Pro</span></h3>
+          <div class="for">転記をとにかく速くしたい人に</div>
+          <div class="yen"><div>月額<b>¥690<small> / 月</small></b></div><div>年額<b>¥5,900<small> / 年</small></b></div></div>
           <ul>
             <li>ラクマ・Yahoo!フリマ・ヤフオクへ転記</li>
-            <li>画像の一括ダウンロード</li>
-            <li>コメント・取引メッセージの定型文</li>
-            <li class="no">商品管理DB・一括削除</li>
+            <li>カテゴリ・ブランドもほぼ自動で選択</li>
+            <li>売れたら他サイトの削除ボタンまで案内</li>
+            <li>全サイトの値下げ・値上げ</li>
+            <li>画像の一括ダウンロード・定型文</li>
           </ul>
-          <a class="btn red" href="https://fuukazin.gumroad.com/l/rswvg" target="_blank" rel="noopener">購入ページへ <span class="arr">→</span></a>
+          <a class="btn pri" href="https://fuukazin.gumroad.com/l/rswvg" target="_blank" rel="noopener">購入ページへ →</a>
         </div>
-        <div class="card pcard" style="--bar:linear-gradient(90deg,var(--rakuma),var(--kraft))">
-          <div class="t"><img src="images/icon-kanri.png" alt=""><h3>フリマ管理アシスト</h3></div>
-          <p class="who">複数サイトの在庫もまとめて管理したい人に</p>
-          <div class="p"><div><b>¥690</b><em> / 月</em></div><div><b>¥5,900</b><em> / 年</em></div></div>
+        <div class="glass glow-edge plan reveal" style="--spin:180deg">
+          <h3><img src="images/icon-kanri.png" alt=""><span class="neon d2">フリマ管理アシスト</span></h3>
+          <div class="for">複数サイトの在庫もまとめて管理したい人に</div>
+          <div class="yen"><div>月額<b>¥690<small> / 月</small></b></div><div>年額<b>¥5,900<small> / 年</small></b></div></div>
           <ul>
             <li>ラクマ・Yahoo!フリマ・ヤフオクへ転記</li>
+            <li>カテゴリ・ブランドも自動入力</li>
             <li>商品管理DB（管理番号で呼び出し）</li>
             <li>「売れた！」ボタンで他サイトを一括削除</li>
             <li>トライアルはクレジットカード不要</li>
           </ul>
-          <a class="btn solid" href="https://fuukazin.gumroad.com/l/hnpwm" target="_blank" rel="noopener">購入ページへ <span class="arr">→</span></a>
+          <a class="btn pri" href="https://fuukazin.gumroad.com/l/hnpwm" target="_blank" rel="noopener">購入ページへ →</a>
         </div>
       </div>
 
-      <div class="rv" style="margin-top:64px">
-        <p class="lab">Fields</p>
-        <h3 style="font-size:22px;font-weight:900;margin-top:14px">転記できる項目（フリマ管理アシスト）</h3>
-        <div class="matrix card">
-          <table>
-            <thead><tr><th>転記先</th><th>タイトル</th><th>価格</th><th>説明文</th><th>商品の状態</th><th>画像</th></tr></thead>
-            <tbody>
-              <tr><td><span class="mk r">ラクマ</span></td><td><span class="y"></span></td><td><span class="y"></span></td><td><span class="y"></span></td><td><span class="y"></span></td><td><span class="y"></span> 最大20枚</td></tr>
-              <tr><td><span class="mk f">Yahoo!フリマ</span></td><td><span class="y"></span></td><td><span class="y"></span></td><td><span class="y"></span></td><td><span class="dash">―</span></td><td><span class="y"></span> 最大20枚</td></tr>
-              <tr><td><span class="mk a">ヤフオク</span></td><td><span class="y"></span></td><td><span class="y"></span></td><td><span class="y"></span></td><td><span class="dash">―</span></td><td><span class="y"></span> 最大10枚</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="mnote">カテゴリ・配送方法など一部の項目は、各サイトの仕様上、手動での選択が必要です。</p>
+      <div class="glass matrix reveal">
+        <h4>転記できる項目（フリマ管理アシスト）</h4>
+        <table>
+          <thead><tr><th>転記先</th><th>タイトル</th><th>価格</th><th>説明文</th><th>商品の状態</th><th>画像</th></tr></thead>
+          <tbody>
+            <tr><td>ラクマ</td><td class="ok">●</td><td class="ok">●</td><td class="ok">●</td><td class="ok">●</td><td>最大20枚</td></tr>
+            <tr><td>Yahoo!フリマ</td><td class="ok">●</td><td class="ok">●</td><td class="ok">●</td><td class="na">―</td><td>最大20枚</td></tr>
+            <tr><td>ヤフオク</td><td class="ok">●</td><td class="ok">●</td><td class="ok">●</td><td class="na">―</td><td>最大10枚</td></tr>
+          </tbody>
+        </table>
+        <p class="note">カテゴリ・ブランドはほぼ自動で入りますが、各サイトのデータベースにない場合などは手動で選んでください。配送方法など一部の項目は、各サイトの仕様上、手動での選択が必要です。</p>
       </div>
     </div>
   </section>
 
-  <section class="block" id="movie" style="background:var(--surface)">
+  <!-- 動画 -->
+  <section id="movie">
     <div class="wrap">
-      <div class="head rv">
-        <div><p class="lab">Movie</p><p class="en">Movies</p></div>
-        <div><h2>動画で見る</h2><p>実際の操作画面で、使い方を紹介しています。</p></div>
+      <div class="head reveal">
+        <div class="eyebrow">Movie</div>
+        <div class="en">Movies</div>
+        <h2>動画で見る</h2>
+        <p>実際の操作画面で、使い方を紹介しています。</p>
       </div>
-      <div class="vids">
-        <div class="vid rv">
-          <a class="frame yt" data-id="89o7kxexUT4" href="https://youtu.be/89o7kxexUT4" target="_blank" rel="noopener" aria-label="フリマ管理アシストの動画を再生">
-            <span class="poster" style="--pbg:linear-gradient(135deg,#1E3A8A,#2563EB 55%,#B9874F)"><small>YOUTUBE</small><b>フリマ管理アシスト</b></span>
-            <img src="https://i.ytimg.com/vi/89o7kxexUT4/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
-            <span class="play">再生</span>
-          </a>
-          <h3>フリマ管理アシスト</h3>
-          <p>Yahoo!フリマ補助パネルとヤフオク出品の流れ</p>
-        </div>
-        <div class="vid rv">
-          <a class="frame yt" data-id="Bepfbzw6eQc" href="https://youtu.be/Bepfbzw6eQc" target="_blank" rel="noopener" aria-label="フリマ出品アシスト Proの動画を再生">
-            <span class="poster" style="--pbg:linear-gradient(135deg,#9F1D17,#EA352D 55%,#FF5263)"><small>YOUTUBE</small><b>フリマ出品アシスト Pro</b></span>
-            <img src="https://i.ytimg.com/vi/Bepfbzw6eQc/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
-            <span class="play">再生</span>
-          </a>
-          <h3>フリマ出品アシスト Pro</h3>
-          <p>メルカリからほかのフリマへ転記する流れ</p>
-        </div>
+      <div class="movies">
+        <a class="glass movie reveal" href="https://youtu.be/Z4R7eHCR2OY" target="_blank" rel="noopener">
+          <div class="th"><img src="https://i.ytimg.com/vi/Z4R7eHCR2OY/hqdefault.jpg" alt="" loading="lazy"><span class="badge new">NEW</span><span class="play"></span></div>
+          <div class="mt"><b class="neon">フリマ出品アシスト Pro</b><span>新機能の使い方</span></div>
+        </a>
+        <a class="glass movie reveal" href="https://youtube.com/shorts/q0MQMo_tXUA" target="_blank" rel="noopener">
+          <div class="th"><img src="https://i.ytimg.com/vi/q0MQMo_tXUA/hqdefault.jpg" alt="" loading="lazy"><span class="badge">SHORTS</span><span class="play"></span></div>
+          <div class="mt"><b class="neon d3">フリマ出品アシスト Pro</b><span>3サイト同時出品をショート動画で</span></div>
+        </a>
+        <a class="glass movie reveal" href="https://youtu.be/9zyZ_JSLr0o" target="_blank" rel="noopener">
+          <div class="th"><img src="https://i.ytimg.com/vi/9zyZ_JSLr0o/hqdefault.jpg" alt="" loading="lazy"><span class="badge new">NEW</span><span class="play"></span></div>
+          <div class="mt"><b class="neon d2">フリマ管理アシスト</b><span>カテゴリ・ブランド自動入力の大型アップデート</span></div>
+        </a>
+        <a class="glass movie reveal" href="https://youtu.be/89o7kxexUT4" target="_blank" rel="noopener">
+          <div class="th"><img src="https://i.ytimg.com/vi/89o7kxexUT4/hqdefault.jpg" alt="" loading="lazy"><span class="badge">YOUTUBE</span><span class="play"></span></div>
+          <div class="mt"><b class="neon d2">フリマ管理アシスト</b><span>Yahoo!フリマ補助パネルとヤフオク出品の流れ</span></div>
+        </a>
       </div>
-      <div class="more">
-        <a class="btn" href="https://note.com/niche_hobby" target="_blank" rel="noopener">note記事で詳しく読む <span class="arr">→</span></a>
-      </div>
+      <div class="cta reveal" style="margin-top:36px"><a class="btn" href="https://note.com/niche_hobby" target="_blank" rel="noopener">note記事で詳しく読む →</a></div>
     </div>
   </section>
 
-  <section class="block" id="flow">
+  <!-- はじめ方 -->
+  <section id="flow">
     <div class="wrap">
-      <div class="head rv">
-        <div><p class="lab">Flow</p><p class="en">How to Start</p></div>
-        <div><h2>はじめ方</h2><p>インストールしてすぐ、7日間の無料トライアルで試せます。</p></div>
+      <div class="head reveal">
+        <div class="eyebrow">Flow</div>
+        <div class="en">How to Start</div>
+        <h2>はじめ方</h2>
+        <p>インストールしてすぐ、7日間の無料トライアルで試せます。</p>
       </div>
-      <ol class="steps rv">
-        <li><h3>Chromeに追加</h3><p>Chromeウェブストアから拡張機能をインストールします。</p></li>
-        <li><h3>無料トライアル開始</h3><p>7日間、全機能を試せます。</p></li>
-        <li><h3>ボタンを押して転記</h3><p>メルカリの商品ページで保存して、ほかのフリマの出品ページでボタンを押します。</p></li>
-        <li><h3>気に入ったら購入</h3><p>Gumroadで月額または年額プランを購入し、届いたライセンスキーを入力します。</p></li>
+      <ol class="flow">
+        <li class="glass reveal"><h3>Chromeに追加</h3><p>Chromeウェブストアから拡張機能をインストールします。</p></li>
+        <li class="glass reveal"><h3>無料トライアル開始</h3><p>7日間、全機能を試せます。</p></li>
+        <li class="glass reveal"><h3>ボタンを押して転記</h3><p>メルカリの商品ページで保存して、ほかのフリマの出品ページでボタンを押します。</p></li>
+        <li class="glass reveal"><h3>気に入ったら購入</h3><p>Gumroadで月額または年額プランを購入し、届いたライセンスキーを入力します。</p></li>
       </ol>
     </div>
   </section>
 
-  <section class="block" id="faq" style="padding-top:0">
+  <!-- FAQ -->
+  <section id="faq">
     <div class="wrap">
-      <div class="head rv">
-        <div><p class="lab">FAQ</p><p class="en">Questions</p></div>
-        <div><h2>よくある質問</h2></div>
+      <div class="head reveal">
+        <div class="eyebrow">FAQ</div>
+        <div class="en">Questions</div>
+        <h2>よくある質問</h2>
       </div>
-      <div class="faq rv">
-        <details>
-          <summary><span class="q">Q</span>スマホでも使えますか？<span class="pm" aria-hidden="true"></span></summary>
-          <p class="a">Chrome拡張機能のため、パソコン版のGoogle Chrome（Windows・Mac）のみ対応しています。</p>
-        </details>
-        <details>
-          <summary><span class="q">Q</span>メルカリのログイン情報は取得されますか？<span class="pm" aria-hidden="true"></span></summary>
-          <p class="a">取得するのは商品情報（タイトル・価格・説明文・画像）だけです。ログイン情報や個人情報は一切取得しません。</p>
-        </details>
-        <details>
-          <summary><span class="q">Q</span>ラクマ・Yahoo!フリマ・ヤフオクのアカウントは必要ですか？<span class="pm" aria-hidden="true"></span></summary>
-          <p class="a">はい、それぞれのサービスのアカウントが別途必要です。</p>
-        </details>
-        <details>
-          <summary><span class="q">Q</span>トライアル終了後、自動で課金されますか？<span class="pm" aria-hidden="true"></span></summary>
-          <p class="a">自動で課金されることはありません。続けて使う場合は、月額または年額プランをご購入ください。</p>
-        </details>
-        <details>
-          <summary><span class="q">Q</span>解約はいつでもできますか？<span class="pm" aria-hidden="true"></span></summary>
-          <p class="a">Gumroadのマイページから、いつでもすぐに解約できます。次回の更新日以降の請求は発生しません。</p>
-        </details>
-        <details>
-          <summary><span class="q">Q</span>ブランド名が入力されないことがあります。<span class="pm" aria-hidden="true"></span></summary>
-          <p class="a">Yahoo!フリマ・ラクマのブランドデータベースに登録されていないブランドがあります。「お探しのワードでは見つかりませんでした」と表示される場合は、各サイト側の仕様です。</p>
-        </details>
-        <details>
-          <summary><span class="q">Q</span>ライセンスキーが届きません。<span class="pm" aria-hidden="true"></span></summary>
-          <p class="a">購入後、登録したメールアドレスに自動で送信しています。まず迷惑メールフォルダを確認してください。見つからない場合は、もう一度購入せずに（二重請求になります）、メールかLINE公式アカウントでご連絡ください。確認してキーをお送りします。</p>
-        </details>
-        <details>
-          <summary><span class="q">Q</span>出品アシスト Pro と 管理アシスト の違いは？<span class="pm" aria-hidden="true"></span></summary>
-          <p class="a">料金は同じです。出品アシスト Pro は転記に加えて、画像の一括ダウンロードと定型文が使えます。管理アシストは転記に加えて、商品管理DBと「売れた！」ボタンでの一括削除が使えます。</p>
-        </details>
+      <div class="faq">
+        <details class="glass reveal"><summary>スマホでも使えますか？</summary><p>Chrome拡張機能のため、パソコン版のGoogle Chrome（Windows・Mac）のみ対応しています。</p></details>
+        <details class="glass reveal"><summary>メルカリのログイン情報は取得されますか？</summary><p>取得するのは商品情報（タイトル・価格・説明文・画像など）だけです。ログイン情報や個人情報は一切取得しません。</p></details>
+        <details class="glass reveal"><summary>ラクマ・Yahoo!フリマ・ヤフオクのアカウントは必要ですか？</summary><p>はい、それぞれのサービスのアカウントが別途必要です。</p></details>
+        <details class="glass reveal"><summary>トライアル終了後、自動で課金されますか？</summary><p>自動で課金されることはありません。続けて使う場合は、月額または年額プランをご購入ください。</p></details>
+        <details class="glass reveal"><summary>解約はいつでもできますか？</summary><p>Gumroadのマイページから、いつでもすぐに解約できます。次回の更新日以降の請求は発生しません。</p></details>
+        <details class="glass reveal"><summary>売れたら、他サイトの出品は自動で消えますか？</summary><p>出品アシスト Pro は、他サイトの削除ボタンの手前まで自動で案内します。誤って消さないよう、最後の確定はご自身で押してください。管理アシストは「売れた！」ボタンで他サイトの出品をまとめて削除できます。</p></details>
+        <details class="glass reveal"><summary>ブランド名が入力されないことがあります。</summary><p>Yahoo!フリマ・ラクマのブランドデータベースに登録されていないブランドがあります。その場合はメーカー名で代わりに入ることもあります。「お探しのワードでは見つかりませんでした」と表示される場合は、各サイト側の仕様です。</p></details>
+        <details class="glass reveal"><summary>ライセンスキーが届きません。</summary><p>購入後、登録したメールアドレスに自動で送信しています。まず迷惑メールフォルダを確認してください。見つからない場合は、もう一度購入せずに（二重請求になります）、メールかLINE公式アカウントでご連絡ください。確認してキーをお送りします。</p></details>
+        <details class="glass reveal"><summary>出品アシスト Pro と 管理アシスト の違いは？</summary><p>料金は同じです。出品アシスト Pro は「転記を速くする」ツールで、画像の一括ダウンロード、定型文、売れたあとの削除案内、全サイトの値下げ・値上げが使えます。管理アシストは「在庫をまとめて管理する」ツールで、商品管理DBと「売れた！」ボタンでの一括削除が使えます。</p></details>
       </div>
     </div>
   </section>
 
-  <section class="block" id="contact" style="padding-top:0">
+  <!-- MONON -->
+  <section id="monon">
     <div class="wrap">
-      <div class="contact rv">
-        <div>
-          <p class="lab">Contact</p>
-          <p class="en">Contact</p>
-          <p>使い方の質問、不具合のご報告、ご要望はこちらから。同じ作業の繰り返しにうんざりしたことがきっかけで作り始めたツールです。いただいた声は次のアップデートに活かしています。</p>
-          <p class="reply">個人開発のため、返信に1〜2日いただく場合があります。必ず対応します。</p>
+      <div class="head reveal">
+        <div class="eyebrow">Beyond</div>
+        <div class="en">Universe</div>
+        <h2>niche-hobby のほかの活動</h2>
+        <p>ツールづくりの合間に、キャラクターも作っています。</p>
+      </div>
+      <a class="glass universe reveal" href="monon/">
+        <div class="stage">
+          <div class="stars"></div>
+          <span class="bubble">それな</span>
+          <svg class="monon-svg" viewBox="0 0 200 250" aria-label="MONON のイラスト">
+            <defs>
+              <radialGradient id="hd" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#E9E8E4"/><stop offset="1" stop-color="#BDBBB6"/></radialGradient>
+              <radialGradient id="bd" cx="35%" cy="25%" r="85%"><stop offset="0" stop-color="#4A4A50"/><stop offset=".55" stop-color="#1C1C21"/><stop offset="1" stop-color="#050506"/></radialGradient>
+              <radialGradient id="bl" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#C9C8C4"/></radialGradient>
+            </defs>
+            <path d="M100 52 Q98 30 112 22 L124 14" fill="none" stroke="#1C1C21" stroke-width="5" stroke-linecap="round"/>
+            <circle class="ball" cx="128" cy="11" r="9" fill="url(#bl)"/>
+            <path d="M58 150 Q60 128 100 126 Q140 128 142 150 Q150 200 162 222 Q100 240 38 222 Q50 200 58 150Z" fill="url(#bd)"/>
+            <ellipse cx="100" cy="98" rx="52" ry="58" fill="url(#hd)"/>
+            <ellipse cx="80" cy="102" rx="8.5" ry="10" fill="#111"/>
+            <ellipse cx="120" cy="102" rx="8.5" ry="10" fill="#111"/>
+            <circle cx="83" cy="98" r="2.6" fill="#fff"/>
+            <circle cx="123" cy="98" r="2.6" fill="#fff"/>
+            <path d="M92 124 Q100 130 108 124" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+          </svg>
         </div>
-        <div class="cards">
-          <a class="cc" href="https://lin.ee/u6rgCbP" target="_blank" rel="noopener"><span class="ic" style="--ic:#06C755">LINE</span><span><b>LINE公式アカウント</b><small>@978rgtyk</small></span><span class="go">→</span></a>
-          <a class="cc" href="mailto:support@niche-hobby.com"><span class="ic" style="--ic:#2563EB">@</span><span><b>メール</b><small>support@niche-hobby.com</small></span><span class="go">→</span></a>
-          <a class="cc" href="https://note.com/niche_hobby" target="_blank" rel="noopener"><span class="ic" style="--ic:#41C9B4">note</span><span><b>note</b><small>使い方・活用法の記事</small></span><span class="go">→</span></a>
+        <div class="body">
+          <div class="eyebrow">New Character</div>
+          <h3>MONON<small>モノン ／ 白黒の宇宙人</small></h3>
+          <p>地球にやってきた、白黒モノトーンのクレイ風宇宙人。口ぐせは「それな」。LINEの動くスタンプ、グッズ、noteの連載で活動中です。</p>
+          <div class="chips"><span>LINE 動くスタンプ</span><span>グッズ</span><span>note 連載</span><span>YouTube</span></div>
+          <span class="go">MONON のページへ →</span>
         </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 問い合わせ -->
+  <section id="contact">
+    <div class="wrap contact">
+      <div class="reveal">
+        <div class="eyebrow">Contact</div>
+        <div class="head" style="margin-bottom:24px"><div class="en">Contact</div><h2>お問い合わせ</h2></div>
+        <p>使い方の質問、不具合のご報告、ご要望はこちらから。同じ作業の繰り返しにうんざりしたことがきっかけで作り始めたツールです。いただいた声は次のアップデートに活かしています。</p>
+        <p style="margin-top:14px;font-size:14px;color:var(--t3)">個人開発のため、返信に1〜2日いただく場合があります。必ず対応します。</p>
+      </div>
+      <div class="links reveal">
+        <a class="glass" href="https://lin.ee/u6rgCbP" target="_blank" rel="noopener"><span class="ic">LINE</span><div><b>LINE公式アカウント</b><small>@978rgtyk</small></div><span class="arr">→</span></a>
+        <a class="glass" href="mailto:support@niche-hobby.com"><span class="ic">@</span><div><b>メール</b><small>support@niche-hobby.com</small></div><span class="arr">→</span></a>
+        <a class="glass" href="https://note.com/niche_hobby" target="_blank" rel="noopener"><span class="ic">note</span><div><b>note</b><small>使い方・活用法の記事</small></div><span class="arr">→</span></a>
       </div>
     </div>
   </section>
@@ -676,327 +694,197 @@ footer .copy-r{margin-left:auto;font-family:var(--display);font-size:13px;letter
 
 <footer>
   <div class="wrap">
-    <a class="logo" href="#top"><img src="images/icon-pro.png" alt="" width="32" height="32"><b>niche-hobby</b></a>
-    <a href="/tokusho">特定商取引法に基づく表記</a>
-    <a href="https://fuukazin-rgb.github.io/furima-privacy/privacy_policy.html" target="_blank" rel="noopener">プライバシーポリシー</a>
-    <span class="copy-r">© niche-hobby</span>
+    <a class="brand" href="#top" aria-label="niche hobby トップへ">
+      <svg viewBox="0 0 120 96" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" aria-hidden="true">
+        <path class="mk-n" d="M14 86V48Q14 34 37 34Q60 34 60 48"/>
+        <path class="mk-h" d="M60 10V86M60 48Q60 34 83 34Q106 34 106 48V86"/>
+      </svg>
+      <b>niche <span>hobby</span></b>
+    </a>
+    <nav>
+      <a href="monon/">MONON</a>
+      <a href="https://niche-hobby.com/tokusho">特定商取引法に基づく表記</a>
+      <a href="https://fuukazin-rgb.github.io/furima-privacy/privacy_policy.html">プライバシーポリシー</a>
+    </nav>
+    <small>© niche-hobby</small>
   </div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
-  var root = document.documentElement;
-  root.classList.add('js');
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fine = window.matchMedia('(pointer: fine)').matches;
-  var darkMQ = window.matchMedia('(prefers-color-scheme: dark)');
-  var motionOn = !reduce;
+  var root=document.documentElement;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var motionOn=!reduce;
+  try{ if(localStorage.getItem('nh-motion')==='off') motionOn=false; }catch(e){}
+  var btn=document.getElementById('motionBtn');
+  function paintBtn(){
+    root.setAttribute('data-motion',motionOn?'on':'off');
+    btn.setAttribute('aria-label',motionOn?'アニメーションを止める':'アニメーションを再生する');
+    btn.innerHTML=motionOn
+      ?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6v12M15 6v12"/></svg>'
+      :'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  }
+  paintBtn();
+  btn.addEventListener('click',function(){
+    motionOn=!motionOn; paintBtn();
+    try{ localStorage.setItem('nh-motion',motionOn?'on':'off'); }catch(e){}
+  });
 
-  /* clock (Japan time) */
-  var clockEl = document.getElementById('clock');
+  /* 時計 */
+  var clock=document.getElementById('clock');
   function tick(){
-    var p = {};
-    new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'})
-      .formatToParts(new Date()).forEach(function(x){ p[x.type] = x.value; });
-    clockEl.textContent = p.year+'-'+p.month+'-'+p.day+' '+p.hour+':'+p.minute+':'+p.second+' GMT +9';
+    var d=new Date(Date.now()+9*3600*1000);
+    clock.textContent=d.toISOString().slice(11,19);
   }
-  tick(); setInterval(tick, 1000);
+  tick(); setInterval(tick,1000);
 
-  /* theme */
-  var bL = document.getElementById('th-light'), bD = document.getElementById('th-dark');
-  function isDark(){ var t = root.getAttribute('data-theme'); return t ? t === 'dark' : darkMQ.matches; }
-  function syncTheme(){
-    var d = isDark();
-    bD.setAttribute('aria-pressed', d ? 'true' : 'false');
-    bL.setAttribute('aria-pressed', d ? 'false' : 'true');
-    if (window.__scene) window.__scene.recolor();
-  }
-  function setTheme(t){
-    root.setAttribute('data-theme', t);
-    try { localStorage.setItem('nh-theme', t); } catch(e){}
-    syncTheme();
-  }
-  try { var saved = localStorage.getItem('nh-theme'); if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved); } catch(e){}
-  bL.addEventListener('click', function(){ setTheme('light'); });
-  bD.addEventListener('click', function(){ setTheme('dark'); });
-  if (darkMQ.addEventListener) darkMQ.addEventListener('change', syncTheme);
+  /* スクロールで出てくる */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
-  /* motion toggle */
-  var mBtn = document.getElementById('motion');
-  function syncMotion(){
-    mBtn.setAttribute('aria-pressed', motionOn ? 'true' : 'false');
-    mBtn.setAttribute('aria-label', motionOn ? 'アニメーションを止める' : 'アニメーションを再生');
-    document.body.classList.toggle('still', !motionOn);
-    if (window.__scene) window.__scene.setRunning();
-  }
-  mBtn.addEventListener('click', function(){ motionOn = !motionOn; syncMotion(); });
-
-  /* WebGL warehouse aisle (kraft boxes with marketplace-colored labels) */
-  (function(){
-    var canvas = document.getElementById('gl');
-    if (!window.THREE) return;
-    var renderer;
-    try { renderer = new THREE.WebGLRenderer({canvas:canvas, antialias:true, preserveDrawingBuffer:true}); }
-    catch(e){ return; }
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    renderer.outputEncoding = THREE.sRGBEncoding;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.05;
-
-    var scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0xEFE4D3, 7, 44);
-    var camera = new THREE.PerspectiveCamera(52, 1, 0.1, 90);
-    camera.position.set(0, 1.55, 4);
-
-    var seed = 11;
-    function rnd(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
-
-    function makeTex(fibers, lo){
-      var c = document.createElement('canvas'); c.width = c.height = 256;
-      var x = c.getContext('2d'), img = x.createImageData(256,256);
-      for (var i = 0; i < img.data.length; i += 4){
-        var v = lo + Math.random() * (255 - lo) | 0;
-        img.data[i] = img.data[i+1] = img.data[i+2] = v; img.data[i+3] = 255;
-      }
-      x.putImageData(img,0,0);
-      if (fibers){
-        for (var k = 0; k < 180; k++){
-          x.strokeStyle = 'rgba(60,30,0,' + (Math.random()*.10) + ')';
-          x.lineWidth = Math.random() * 1.6;
-          var y = Math.random()*256;
-          x.beginPath(); x.moveTo(0,y); x.lineTo(256, y + (Math.random()-.5)*8); x.stroke();
-        }
-      }
-      var t = new THREE.CanvasTexture(c);
-      t.wrapS = t.wrapT = THREE.RepeatWrapping;
-      t.encoding = THREE.sRGBEncoding;
-      return t;
-    }
-    // shipping label: white card with a colored band and barcode
-    function labelTex(color){
-      var c = document.createElement('canvas'); c.width = 128; c.height = 160;
-      var x = c.getContext('2d');
-      x.fillStyle = '#F7F5F0'; x.fillRect(0,0,128,160);
-      x.fillStyle = color; x.fillRect(0,0,128,40);
-      x.fillStyle = '#2a2a2a';
-      for (var i = 0; i < 4; i++) x.fillRect(12, 54 + i*14, 60 + (i*23 % 44), 5);
-      for (var b = 12; b < 116; b += 3) { var w = (b*7 % 3) + 1; x.fillRect(b, 118, w, 30); }
-      var t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; return t;
-    }
-
-    var boxTex = makeTex(true, 200), floorTex = makeTex(false, 228);
-    floorTex.repeat.set(10, 40);
-    var boxMat   = new THREE.MeshStandardMaterial({map:boxTex, roughness:.9, metalness:0});
-    var tapeMat  = new THREE.MeshStandardMaterial({roughness:.3, metalness:0, transparent:true, opacity:.92});
-    var floorMat = new THREE.MeshStandardMaterial({map:floorTex, roughness:.8, metalness:0});
-    var labelMats = ['#EA352D','#2563EB','#FF5263','#E60033'].map(function(c){
-      return new THREE.MeshStandardMaterial({map:labelTex(c), roughness:.7});
-    });
-    var unit = new THREE.BoxGeometry(1,1,1);
-    var plane = new THREE.PlaneGeometry(1,1);
-
-    var floor = new THREE.Mesh(new THREE.PlaneGeometry(40, 160), floorMat);
-    floor.rotation.x = -Math.PI/2; floor.receiveShadow = true;
-    scene.add(floor);
-
-    // colored floor guide lines (one per marketplace)
-    var lineCols = [0xEA352D, 0x2563EB, 0xFF5263, 0xE60033];
-    var lanes = new THREE.Group();
-    [-0.42,-0.14,0.14,0.42].forEach(function(x, i){
-      var m = new THREE.Mesh(new THREE.PlaneGeometry(.07, 160), new THREE.MeshStandardMaterial({color:lineCols[i], roughness:.6, emissive:lineCols[i], emissiveIntensity:.12}));
-      m.rotation.x = -Math.PI/2; m.position.set(x, .003, 0); m.receiveShadow = true; lanes.add(m);
-    });
-    scene.add(lanes);
-
-    function box(w,h,d,label,side){
-      var g = new THREE.Group();
-      var b = new THREE.Mesh(unit, boxMat); b.scale.set(w,h,d); b.castShadow = b.receiveShadow = true; g.add(b);
-      var tp = new THREE.Mesh(unit, tapeMat); tp.scale.set(w*.18, .012, d*1.004); tp.position.y = h/2 + .004; g.add(tp);
-      var tf = new THREE.Mesh(unit, tapeMat); tf.scale.set(.012, h*.24, w*.18); tf.position.set(-side*(w/2 + .004), h/2 - h*.12, 0); g.add(tf);
-      if (label){
-        var lb = new THREE.Mesh(plane, labelMats[(rnd()*4)|0]);
-        var lw = Math.min(.36, d*.3); lb.scale.set(lw, lw*1.25, 1);
-        lb.rotation.y = -side * Math.PI/2;
-        lb.position.set(-side*(w/2 + .006), (rnd()-.4)*h*.3, (rnd()-.5)*d*.35);
-        g.add(lb);
-      }
-      return g;
-    }
-
-    var GAP = 2.6, ROWS = 22, LEN = GAP*ROWS, rows = [];
-    for (var r = 0; r < ROWS; r++){
-      var row = new THREE.Group();
-      row.position.z = 4 - r*GAP;
-      [-1,1].forEach(function(side){
-        var y = 0, n = 1 + (rnd()*4|0);
-        for (var k = 0; k < n; k++){
-          var w = 1.1 + rnd()*.8, h = .55 + rnd()*.5, d = 1.2 + rnd()*.9;
-          var b = box(w,h,d, rnd() < .55, side);
-          b.position.set(side*(1.55 + w/2 + rnd()*.25), y + h/2, (rnd()-.5)*.5);
-          b.rotation.y = (rnd()-.5)*.14;
-          row.add(b); y += h;
-        }
-        y = 0; n = 3 + (rnd()*4|0);
-        for (var j = 0; j < n; j++){
-          var w2 = 1.3 + rnd()*.6, h2 = .6 + rnd()*.5, d2 = 1.3 + rnd()*.6;
-          var b2 = box(w2,h2,d2, rnd() < .25, side);
-          b2.position.set(side*(3.6 + rnd()*.4), y + h2/2, (rnd()-.5)*.6);
-          b2.rotation.y = (rnd()-.5)*.1;
-          row.add(b2); y += h2;
-        }
+  /* カードの3Dチルト */
+  var fine=window.matchMedia('(pointer:fine)').matches;
+  if(fine){
+    document.querySelectorAll('.tilt').forEach(function(card){
+      card.addEventListener('pointermove',function(ev){
+        if(!motionOn) return;
+        var r=card.getBoundingClientRect();
+        var x=(ev.clientX-r.left)/r.width-.5, y=(ev.clientY-r.top)/r.height-.5;
+        card.style.setProperty('--ry',(x*6).toFixed(2)+'deg');
+        card.style.setProperty('--rx',(-y*6).toFixed(2)+'deg');
       });
-      scene.add(row); rows.push(row);
-    }
-
-    var hemi = new THREE.HemisphereLight(0xFFF4E2, 0x8A6A48, .6);
-    scene.add(hemi);
-    var sun = new THREE.DirectionalLight(0xFFE2B8, 1.25);
-    sun.castShadow = true;
-    sun.shadow.mapSize.set(1024,1024);
-    var sc = sun.shadow.camera; sc.left = -9; sc.right = 9; sc.top = 12; sc.bottom = -12; sc.near = .5; sc.far = 40;
-    sun.shadow.bias = -0.0008;
-    scene.add(sun); scene.add(sun.target);
-    var glow = new THREE.PointLight(0xFFD7A0, .6, 30, 2);
-    scene.add(glow);
-
-    function col(name){
-      var c = new THREE.Color(getComputedStyle(root).getPropertyValue(name).trim() || '#888888');
-      return c.convertSRGBToLinear();
-    }
-    function recolor(){
-      var bg = col('--scene-bg');
-      scene.background = bg; scene.fog.color = bg;
-      boxMat.color = col('--scene-box');
-      floorMat.color = col('--scene-floor');
-      tapeMat.color = col('--scene-tape');
-      var dark = isDark();
-      hemi.intensity = dark ? .35 : .65;
-      hemi.color.set(dark ? 0x9DB4E0 : 0xFFF4E2);
-      sun.intensity = dark ? .7 : 1.25;
-      sun.color.set(dark ? 0xBFD0FF : 0xFFE2B8);
-      glow.intensity = dark ? 1.6 : .5;
-      glow.color.set(dark ? 0xFFB867 : 0xFFD7A0);
-      renderOnce();
-    }
-
-    function resize(){
-      var w = canvas.clientWidth, h = canvas.clientHeight;
-      if (!w || !h) return;
-      renderer.setSize(w, h, false);
-      camera.aspect = w / h;
-      camera.fov = w < 640 ? 64 : 52;
-      camera.updateProjectionMatrix();
-      renderOnce();
-    }
-
-    var tx = 0, ty = 0, yaw = 0, pitch = 0;
-    if (fine){
-      window.addEventListener('pointermove', function(e){
-        tx = (e.clientX / window.innerWidth - .5);
-        ty = (e.clientY / window.innerHeight - .5);
-      });
-    }
-
-    var travelled = 0;
-    function place(){
-      for (var i = 0; i < rows.length; i++){
-        var row = rows[i];
-        while (row.position.z > camera.position.z + 5) row.position.z -= LEN;
-      }
-      floor.position.z = camera.position.z - 60;
-      lanes.position.z = camera.position.z - 60;
-      floorTex.offset.y = camera.position.z / (160/40);
-      sun.position.set(5, 11, camera.position.z + 3);
-      sun.target.position.set(0, 0, camera.position.z - 8);
-      glow.position.set(0, 2.4, camera.position.z - 16);
-    }
-    function renderOnce(){ place(); renderer.render(scene, camera); }
-
-    var running = false, visible = true, last = 0, rafId = 0;
-    function frame(t){
-      rafId = 0;
-      if (!running) return;
-      var dt = Math.min((t - last) / 1000, .05); last = t;
-      camera.position.z -= dt * .75;
-      travelled += dt;
-      yaw += (-tx * .16 - yaw) * .04;
-      pitch += (-ty * .06 - pitch) * .04;
-      camera.rotation.set(pitch, yaw, 0);
-      camera.position.y = 1.55 + Math.sin(travelled * 1.6) * .015;
-      renderOnce();
-      rafId = requestAnimationFrame(frame);
-    }
-    function setRunning(){
-      var should = motionOn && visible && !document.hidden;
-      if (should && !running){ running = true; last = performance.now(); if (!rafId) rafId = requestAnimationFrame(frame); }
-      else if (!should){ running = false; }
-    }
-    if ('IntersectionObserver' in window){
-      new IntersectionObserver(function(es){ visible = es[0].isIntersecting; setRunning(); }).observe(canvas);
-    }
-    document.addEventListener('visibilitychange', setRunning);
-    window.addEventListener('resize', resize);
-
-    window.__scene = {recolor:recolor, setRunning:setRunning};
-    resize(); recolor(); setRunning();
-  })();
-
-  syncTheme(); syncMotion();
-
-  /* bottom tabs follow the section in view */
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabs a'));
-  if ('IntersectionObserver' in window){
-    var spy = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if (!e.isIntersecting) return;
-        tabs.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id); });
-      });
-    },{rootMargin:'-45% 0px -50% 0px'});
-    ['top','why','tools','price','movie','flow','faq','contact'].forEach(function(id){ var el = document.getElementById(id); if (el) spy.observe(el); });
-  }
-
-  /* tool images lean toward the pointer */
-  if (!reduce && fine){
-    document.querySelectorAll('.art .tilt').forEach(function(c){
-      c.addEventListener('pointermove', function(e){
-        var r = c.getBoundingClientRect();
-        c.style.setProperty('--ty', (((e.clientX - r.left) / r.width - .5) * 10) + 'deg');
-        c.style.setProperty('--tx', (-((e.clientY - r.top) / r.height - .5) * 8) + 'deg');
-      });
-      c.addEventListener('pointerleave', function(){ c.style.removeProperty('--ty'); c.style.removeProperty('--tx'); });
-    });
-  }
-
-  /* reveal below the first screen */
-  if (!reduce && 'IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(es){
-      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.remove('pre'); io.unobserve(e.target); } });
-    },{rootMargin:'0px 0px -8% 0px'});
-    document.querySelectorAll('.rv').forEach(function(el){
-      if (el.getBoundingClientRect().top > window.innerHeight){ el.classList.add('pre'); io.observe(el); }
-    });
-  }
-
-  /* YouTube: play inline on the live site */
-  if (/(^|\.)niche-hobby\.com$/.test(location.hostname)){
-    document.querySelectorAll('.frame.yt').forEach(function(a){
-      a.addEventListener('click', function(ev){
-        ev.preventDefault();
-        var f = document.createElement('iframe');
-        f.src = 'https://www.youtube-nocookie.com/embed/' + a.dataset.id + '?autoplay=1&rel=0';
-        f.title = a.getAttribute('aria-label');
-        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-        f.allowFullscreen = true;
-        var box = document.createElement('div');
-        box.className = 'frame';
-        box.appendChild(f);
-        a.replaceWith(box);
+      card.addEventListener('pointerleave',function(){
+        card.style.setProperty('--ry','0deg'); card.style.setProperty('--rx','0deg');
       });
     });
   }
+
+  /* 3D の nh モノグラム */
+  var canvas=document.getElementById('scene');
+  if(!window.THREE){ return; }
+  var renderer;
+  try{ renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true}); }catch(e){ return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  var scene=new THREE.Scene();
+  scene.fog=new THREE.Fog(0x08090C,14,42);
+  var camera=new THREE.PerspectiveCamera(40,1,.1,100);
+  camera.position.set(0,0.4,13);
+
+  function P(x,y){ return new THREE.Vector3((x-60)/20,(50-y)/20,0); }
+  function tube(points){
+    var path=new THREE.CurvePath();
+    for(var i=0;i<points.length;i++){
+      var s=points[i];
+      if(s.length===2) path.add(new THREE.LineCurve3(P(s[0][0],s[0][1]),P(s[1][0],s[1][1])));
+      else path.add(new THREE.QuadraticBezierCurve3(P(s[0][0],s[0][1]),P(s[1][0],s[1][1]),P(s[2][0],s[2][1])));
+    }
+    return path;
+  }
+  var R=.3;
+  var nPath=tube([[[14,86],[14,48]],[[14,48],[14,34],[37,34]],[[37,34],[60,34],[60,48]]]);
+  var hStem=tube([[[60,10],[60,86]]]);
+  var hArch=tube([[[60,48],[60,34],[83,34]],[[83,34],[106,34],[106,48]],[[106,48],[106,86]]]);
+
+  var matN=new THREE.MeshStandardMaterial({color:0xF6F5F2,metalness:.25,roughness:.25,emissive:0xffffff,emissiveIntensity:.08});
+  var matH=new THREE.MeshStandardMaterial({color:0x12A37A,metalness:.35,roughness:.2,emissive:0x12A37A,emissiveIntensity:.6});
+  var mark=new THREE.Group();
+  function addTube(path,mat,seg){
+    mark.add(new THREE.Mesh(new THREE.TubeGeometry(path,seg,R,28,false),mat));
+  }
+  addTube(nPath,matN,120); addTube(hStem,matH,60); addTube(hArch,matH,120);
+  var capGeo=new THREE.SphereGeometry(R,24,24);
+  [[14,86,matN],[60,10,matH],[60,86,matH],[106,86,matH]].forEach(function(c){
+    var s=new THREE.Mesh(capGeo,c[2]); s.position.copy(P(c[0],c[1])); mark.add(s);
+  });
+  mark.position.y=.1;
+
+  /* 発光のにじみ */
+  function glowTex(color){
+    var c=document.createElement('canvas'); c.width=c.height=128;
+    var g=c.getContext('2d'); var gr=g.createRadialGradient(64,64,0,64,64,64);
+    gr.addColorStop(0,color); gr.addColorStop(.35,color.replace(/[\d.]+\)$/,'0.25)')); gr.addColorStop(1,'rgba(0,0,0,0)');
+    g.fillStyle=gr; g.fillRect(0,0,128,128);
+    return new THREE.CanvasTexture(c);
+  }
+  var halo=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex('rgba(46,230,168,0.9)'),blending:THREE.AdditiveBlending,transparent:true,depthWrite:false}));
+  halo.scale.set(11,11,1); halo.position.set(.6,0,-1.2);
+  var rig=new THREE.Group(); rig.add(halo); rig.add(mark);
+
+  /* 周りのリング */
+  var ringMat=new THREE.MeshBasicMaterial({color:0x2EE6A8,transparent:true,opacity:.35,blending:THREE.AdditiveBlending});
+  var ring1=new THREE.Mesh(new THREE.TorusGeometry(4.2,.012,8,180),ringMat);
+  var ring2=new THREE.Mesh(new THREE.TorusGeometry(5.1,.008,8,180),ringMat.clone()); ring2.material.opacity=.18;
+  ring1.rotation.x=1.25; ring2.rotation.x=1.1; ring2.rotation.y=.4;
+  rig.add(ring1); rig.add(ring2);
+  /* リングを回る光の粒 */
+  var orb=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex('rgba(200,255,235,1)'),blending:THREE.AdditiveBlending,transparent:true,depthWrite:false}));
+  orb.scale.set(.7,.7,1); rig.add(orb);
+  scene.add(rig);
+
+  /* 浮遊する粒子 */
+  var small=window.innerWidth<700;
+  var N=small?500:1100, pos=new Float32Array(N*3);
+  for(var i=0;i<N;i++){ pos[i*3]=(Math.random()-.5)*40; pos[i*3+1]=(Math.random()-.5)*24; pos[i*3+2]=(Math.random()-.5)*30-4; }
+  var pg=new THREE.BufferGeometry(); pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  var dots=new THREE.Points(pg,new THREE.PointsMaterial({size:.07,map:glowTex('rgba(150,255,215,1)'),transparent:true,opacity:.75,blending:THREE.AdditiveBlending,depthWrite:false}));
+  scene.add(dots);
+
+  /* 床のグリッド */
+  var grid=new THREE.GridHelper(80,80,0x12A37A,0x12A37A);
+  grid.material.transparent=true; grid.material.opacity=.16; grid.position.y=-3.6;
+  scene.add(grid);
+
+  scene.add(new THREE.AmbientLight(0xffffff,.35));
+  var key=new THREE.DirectionalLight(0xffffff,.9); key.position.set(4,6,8); scene.add(key);
+  var rim=new THREE.PointLight(0x2EE6A8,2.2,30); rim.position.set(-5,2,4); scene.add(rim);
+  var back=new THREE.PointLight(0x7CFFD6,1.4,30); back.position.set(3,-2,-4); scene.add(back);
+
+  var mx=0,my=0,tx=0,ty=0;
+  window.addEventListener('pointermove',function(e){ mx=e.clientX/window.innerWidth-.5; my=e.clientY/window.innerHeight-.5; },{passive:true});
+
+  function layout(){
+    var w=canvas.clientWidth,h=canvas.clientHeight;
+    renderer.setSize(w,h,false);
+    camera.aspect=w/h; camera.updateProjectionMatrix();
+    if(w>860){ rig.position.set(4.4,.3,0); rig.scale.setScalar(1); }
+    else {
+      var visH=2*13*Math.tan(20*Math.PI/180);
+      rig.position.set(0,(h/2-205)/h*visH,0); rig.scale.setScalar(.62);
+    }
+  }
+  layout(); window.addEventListener('resize',layout);
+
+  var visible=true;
+  new IntersectionObserver(function(e){ visible=e[0].isIntersecting; }).observe(canvas);
+
+  var clockT=new THREE.Clock(), t=0;
+  function frame(){
+    requestAnimationFrame(frame);
+    if(!visible) return;
+    var dt=Math.min(clockT.getDelta(),.05);
+    if(motionOn) t+=dt;
+    tx+=(mx-tx)*.05; ty+=(my-ty)*.05;
+    var sc=Math.min(window.scrollY/window.innerHeight,1);
+    mark.rotation.y=Math.sin(t*.45)*.55+tx*.8 + sc*1.2;
+    mark.rotation.x=Math.sin(t*.32)*.12+ty*.4;
+    mark.position.y=.1+Math.sin(t*1.1)*.15;
+    var pulse=.5+.5*Math.sin(t*1.8);
+    matH.emissiveIntensity=.45+pulse*.55;
+    halo.material.opacity=.45+pulse*.35;
+    halo.scale.setScalar(10+pulse*1.6);
+    ring1.rotation.z=t*.25; ring2.rotation.z=-t*.18;
+    var a=t*.9; orb.position.set(Math.cos(a)*4.2,Math.sin(a)*4.2*Math.cos(1.25),Math.sin(a)*4.2*Math.sin(1.25));
+    dots.rotation.y=t*.02; dots.position.y=Math.sin(t*.3)*.3;
+    grid.position.z=(t*1.2)%1;
+    camera.position.x=tx*1.2; camera.position.y=.4-ty*.8;
+    camera.lookAt(0,0,0);
+    rim.intensity=1.6+pulse*1.4;
+    renderer.render(scene,camera);
+  }
+  frame();
 })();
 </script>
 </body>
