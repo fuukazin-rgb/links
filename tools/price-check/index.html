@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>メルカリ価格比較アシスト | niche-hobby</title>
+<meta name="description" content="メルカリの相場（最安・平均・最高）を5秒で確認できる無料のChrome拡張機能。">
+<meta property="og:title" content="メルカリ価格比較アシスト | niche-hobby">
+<meta property="og:description" content="メルカリの相場（最安・平均・最高）を5秒で確認できる無料のChrome拡張機能。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://niche-hobby.com/tools/price-check/">
+<meta property="og:image" content="https://niche-hobby.com/images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#08090C">
+<link rel="canonical" href="https://niche-hobby.com/tools/price-check/">
+<link rel="icon" href="/images/nh-mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/images/icon-pro.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Instrument+Serif:ital@0;1&family=Sora:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<a class="sr" href="#main">本文へ移動</a>
+<header class="gh">
+  <div class="in">
+    <a class="brand" href="/" aria-label="niche hobby トップへ">
+      <svg viewBox="0 0 120 96" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" aria-hidden="true"><path class="mk-n" d="M14 86V48Q14 34 37 34Q60 34 60 48"/><path class="mk-h" d="M60 10V86M60 48Q60 34 83 34Q106 34 106 48V86"/></svg>
+      <div><b>niche <span>hobby</span></b><small>Tools for flea-market sellers</small></div>
+    </a>
+    <div class="right">
+      <div class="tagline">List once, <em>sell everywhere.</em> ― フリマせどりの Chrome 拡張機能</div>
+      <nav class="gnav" aria-label="メインメニュー"><a href="/">TOP</a><a href="/tools/" aria-current="page">TOOLS</a><a href="/price/">PRICE</a><a href="/movies/">MOVIES</a><a href="/support/">SUPPORT</a><a href="/monon/" class="mono-l">MONON</a><a href="/about/">ABOUT</a></nav>
+    </div>
+    <div class="tools-h">
+      <button class="ib" id="motionBtn" type="button" aria-label="アニメーションを止める"></button>
+      <button class="ib menu-btn" id="menuBtn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="drawer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-label="メニュー">
+  <div class="top">
+    <a class="brand" href="/"><svg viewBox="0 0 120 96" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" aria-hidden="true"><path class="mk-n" d="M14 86V48Q14 34 37 34Q60 34 60 48"/><path class="mk-h" d="M60 10V86M60 48Q60 34 83 34Q106 34 106 48V86"/></svg><div><b>niche <span>hobby</span></b></div></a>
+    <button class="ib" id="menuClose" type="button" aria-label="メニューを閉じる"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <nav><a href="/">TOP<small>トップ</small></a><a href="/tools/" aria-current="page">TOOLS<small>ツール</small></a><a href="/price/">PRICE<small>料金</small></a><a href="/movies/">MOVIES<small>動画</small></a><a href="/support/">SUPPORT<small>サポート</small></a><a href="/monon/">MONON<small>モノン</small></a><a href="/about/">ABOUT<small>私たちについて</small></a></nav>
+  <div class="tl">List once, sell everywhere.</div>
+</div>
+<main id="main">
+<section class="pbanner" aria-label="メルカリ価格比較アシスト">
+  <div class="art"></div>
+  <div class="ghost" aria-hidden="true">Free</div>
+  
+  <div class="copy">
+    <div class="crumb"><a href="/">TOP</a> ／ <a href="/tools/">TOOLS</a> ／ PRICE CHECK</div>
+    <h1>Research</h1>
+    <p>メルカリ価格比較アシスト</p>
+    <p class="lead">仕入れや値付けの前に、メルカリの相場をすばやく確認。無料で使えます。</p>
+  </div>
+</section>
+<section class="sec wrap">
+  <div class="prod">
+    <div class="vis glow-edge reveal"><div class="rsch" aria-label="メルカリ価格比較アシストの画面イメージ">
+  <div class="url">jp.mercari.com/search?keyword=…</div>
+  <div class="avg">¥3,200<small>相場の目安</small></div>
+  <svg class="spark" viewBox="0 0 300 58" preserveAspectRatio="none" aria-hidden="true">
+    <defs><linearGradient id="sg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2EE6A8" stop-opacity=".45"/><stop offset="1" stop-color="#2EE6A8" stop-opacity="0"/></linearGradient></defs>
+    <path d="M0 44 L30 38 L60 46 L90 30 L120 34 L150 20 L180 28 L210 14 L240 24 L270 10 L300 18 V58 H0Z" fill="url(#sg)"/>
+    <path d="M0 44 L30 38 L60 46 L90 30 L120 34 L150 20 L180 28 L210 14 L240 24 L270 10 L300 18" fill="none" stroke="#2EE6A8" stroke-width="2"/>
+  </svg>
+  <div class="row"><div>最安<b>¥1,500</b></div><div>平均<b>¥3,200</b></div><div>最高<b>¥6,800</b></div></div>
+  <div class="cap">SAMPLE DATA ／ 画面イメージ</div>
+</div></div>
+    <div class="reveal">
+      <div class="tag"><span class="new">FREE</span><span>価格リサーチ</span></div>
+      <h2><span class="neon d3">メルカリ価格比較アシスト</span></h2>
+      <p class="desc">メルカリの検索結果から、最安・平均・最高の価格をまとめて表示。手作業で15分かかっていた価格リサーチを、5秒にします。仕入れ判断や値付けの目安にどうぞ。</p>
+      <div class="cta"><a class="btn pri" href="https://chromewebstore.google.com/detail/jdbdnhlllebiifeplcfbchmflbgjgaod" target="_blank" rel="noopener">Chromeに追加（無料） →</a></div>
+    </div>
+  </div>
+</section>
+<section class="sec tight wrap">
+  <div class="head reveal">
+  <div class="t"><div class="k">Next step</div><h2>Next step<small>出品も速くしたいなら</small></h2></div>
+  
+</div>
+  <div class="tbanners">
+    <a class="tb tilt reveal" href="/tools/pro/"><div class="bgart bg-pro"></div><span class="no" aria-hidden="true">01</span><h3><img src="/images/icon-pro.png" alt=""><span class="neon">フリマ出品アシスト Pro</span></h3><p>相場を見たら、そのまま4サイトに出品。</p><span class="go">View details →</span></a>
+    <a class="tb tilt reveal" href="/tools/kanri/"><div class="bgart bg-kanri"></div><span class="no" aria-hidden="true">02</span><h3><img src="/images/icon-kanri.png" alt=""><span class="neon d2">フリマ管理アシスト</span></h3><p>出品した商品を、管理番号でまとめて管理。</p><span class="go">View details →</span></a>
+  </div>
+</section>
+
+</main>
+<footer class="gf">
+  <div class="big" aria-hidden="true">niche <span>hobby</span></div>
+  <div class="cols">
+    <div>
+      <a class="brand" href="/"><svg viewBox="0 0 120 96" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" aria-hidden="true"><path class="mk-n" d="M14 86V48Q14 34 37 34Q60 34 60 48"/><path class="mk-h" d="M60 10V86M60 48Q60 34 83 34Q106 34 106 48V86"/></svg><div><b>niche <span>hobby</span></b></div></a>
+      <p class="about">フリマせどりの「同じ作業のくり返し」を、Chrome 拡張機能で短くする個人開発ブランドです。</p>
+    </div>
+    <div><h4>Tools</h4><ul>
+      <li><a href="/tools/pro/">フリマ出品アシスト Pro</a></li>
+      <li><a href="/tools/kanri/">フリマ管理アシスト</a></li>
+      <li><a href="/tools/price-check/">メルカリ価格比較アシスト</a></li>
+      <li><a href="/price/">料金</a></li>
+    </ul></div>
+    <div><h4>Support</h4><ul>
+      <li><a href="/support/#flow">はじめ方</a></li>
+      <li><a href="/support/#faq">よくある質問</a></li>
+      <li><a href="/support/#contact">お問い合わせ</a></li>
+      <li><a href="/movies/">動画で見る</a></li>
+    </ul></div>
+    <div><h4>Info</h4><ul>
+      <li><a href="/about/">ABOUT</a></li>
+      <li><a href="/about/#journal">ブログ（JOURNAL）</a></li>
+      <li><a href="/monon/">MONON</a></li>
+      <li><a href="https://note.com/niche_hobby" target="_blank" rel="noopener">note</a></li>
+      <li><a href="/tokusho">特定商取引法に基づく表記</a></li>
+      <li><a href="https://fuukazin-rgb.github.io/furima-privacy/privacy_policy.html">プライバシーポリシー</a></li>
+    </ul></div>
+  </div>
+  <div class="bottom"><span>© niche-hobby</span><span>FUKUOKA, JAPAN ／ JST <b id="clock">--:--:--</b></span></div>
+</footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>
