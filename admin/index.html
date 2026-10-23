@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Journal Editor | niche-hobby</title>
+<link rel="icon" href="/images/nh-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Instrument+Serif:ital@0;1&family=Sora:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+body{background:var(--void)}
+.ad-top{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:16px;padding:14px 24px;background:rgba(8,9,12,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.ad-top .t{font-family:var(--cond);font-weight:800;font-size:24px;letter-spacing:.06em;text-transform:uppercase}
+.ad-top .t i{font-family:var(--serif);font-weight:400;text-transform:none;color:var(--em-hi);letter-spacing:0}
+.ad-top .sp{margin-left:auto;display:flex;gap:10px;align-items:center}
+.ad{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;padding:24px;max-width:1500px;margin:0 auto}
+@media (max-width:1000px){.ad{grid-template-columns:1fr}}
+.card{background:var(--panel-solid);border:1px solid var(--line);border-radius:20px;padding:24px}
+.card + .card{margin-top:20px}
+.card h2{font-family:var(--cond);font-weight:800;font-size:28px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
+.card h2 i{font-family:var(--serif);font-weight:400;text-transform:none;color:var(--em-hi);letter-spacing:0}
+.card .sub{color:var(--t3);font-size:13.5px;margin-bottom:18px}
+label.f{display:block;font-size:13px;font-weight:700;color:var(--t2);margin:16px 0 6px}
+.in,select.in,textarea.in{width:100%;background:#0B0D11;border:1px solid var(--line-2);border-radius:12px;color:var(--text);font:inherit;font-size:15px;padding:12px 14px;outline:none;transition:border-color .2s,box-shadow .2s}
+.in:focus{border-color:var(--em);box-shadow:0 0 0 3px rgba(18,163,122,.25)}
+textarea.in{min-height:120px;resize:vertical;line-height:1.8}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.blocks{display:grid;gap:12px;margin-top:10px}
+.blk{border:1px solid var(--line-2);border-radius:14px;padding:14px;background:rgba(255,255,255,.02)}
+.blk .bh{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.blk .bh b{font-family:var(--cond);font-weight:800;font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--em-hi)}
+.blk .bh .ctl{margin-left:auto;display:flex;gap:6px}
+.mini{height:32px;min-width:32px;padding:0 10px;border-radius:8px;border:1px solid var(--line-2);background:transparent;color:var(--t2);cursor:pointer;font-size:13px}
+.mini:hover{border-color:var(--em);color:var(--em-hi)}
+.mini.del:hover{border-color:#ff6b6b;color:#ff8a8a}
+.blk img{max-height:180px;border-radius:10px;margin-top:8px}
+.addbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.drop{display:grid;place-items:center;min-height:120px;border:1.5px dashed var(--line-2);border-radius:14px;color:var(--t3);font-size:14px;cursor:pointer;text-align:center;padding:14px;position:relative;overflow:hidden}
+.drop:hover{border-color:var(--em);color:var(--em-hi)}
+.drop img{max-height:220px;border-radius:10px}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.status{margin-top:14px;font-size:14px;line-height:1.7;padding:12px 14px;border-radius:12px;display:none}
+.status.on{display:block}
+.status.ok{background:var(--em-soft);border:1px solid rgba(46,230,168,.35);color:var(--em-hi)}
+.status.err{background:rgba(255,80,80,.08);border:1px solid rgba(255,100,100,.35);color:#ffb3b3}
+.status.wait{background:rgba(255,255,255,.04);border:1px solid var(--line-2);color:var(--t2)}
+.plist{display:grid;gap:8px}
+.pitem{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:12px}
+.pitem img{width:72px;height:40px;object-fit:cover;border-radius:6px;background:#111}
+.pitem .tt{flex:1;min-width:0}
+.pitem .tt b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pitem .tt small{color:var(--t3);font-family:var(--mono);font-size:11.5px}
+.preview{position:sticky;top:84px;max-height:calc(100vh - 110px);overflow:auto;border-radius:20px;border:1px solid var(--line);background:var(--void)}
+.preview .article-hero{margin:14px}
+.preview .article{padding:0 24px 40px}
+.preview .lab{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--t3);padding:14px 18px 0}
+.hint{font-size:12.5px;color:var(--t3);margin-top:8px;line-height:1.7}
+details.help summary{cursor:pointer;color:var(--em-hi);font-size:13.5px;margin-top:10px}
+details.help ol{margin:10px 0 0 20px;color:var(--t2);font-size:13.5px;line-height:1.9}
+</style>
+</head>
+<body>
+<header class="ad-top">
+  <a class="brand" href="/" style="gap:10px"><svg viewBox="0 0 120 96" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" style="width:40px;height:32px" aria-hidden="true"><path class="mk-n" d="M14 86V48Q14 34 37 34Q60 34 60 48"/><path class="mk-h" d="M60 10V86M60 48Q60 34 83 34Q106 34 106 48V86"/></svg></a>
+  <div class="t">Journal <i>Editor</i></div>
+  <div class="sp"><a class="btn sm" href="/blog/" target="_blank" rel="noopener">View Journal ↗</a></div>
+</header>
+
+<div class="ad">
+  <div>
+    <section class="card" id="setup">
+      <h2>Connect <i>GitHub</i></h2>
+      <p class="sub">記事を公開するための「鍵」です。この端末のブラウザにだけ保存され、ほかの人には見えません。</p>
+      <label class="f" for="token">GitHub トークン</label>
+      <input class="in" id="token" type="password" autocomplete="off" placeholder="github_pat_…">
+      <div class="addbar"><button class="btn sm pri" id="saveToken" type="button">保存して接続</button><button class="btn sm" id="forget" type="button">この端末から消す</button></div>
+      <details class="help"><summary>トークンの作り方</summary>
+        <ol>
+          <li>GitHub の Settings → Developer settings → Personal access tokens → <b>Fine-grained tokens</b> → Generate new token</li>
+          <li>Repository access で <b>Only select repositories</b> → <b>fuukazin-rgb/links</b> だけを選ぶ</li>
+          <li>Permissions の <b>Contents</b> を <b>Read and write</b> にする</li>
+          <li>作成されたトークンをここに貼り付けて「保存して接続」</li>
+        </ol>
+      </details>
+      <div class="status" id="setupStatus"></div>
+    </section>
+
+    <section class="card" id="listCard">
+      <h2>Your <i>stories</i></h2>
+      <p class="sub">書いた記事の一覧です。「編集」で書き直し、「削除」でサイトから消せます。</p>
+      <div class="plist" id="plist"><p class="hint">GitHub に接続すると表示されます。</p></div>
+      <div class="addbar"><button class="btn sm" id="newPost" type="button">＋ 新しい記事</button></div>
+    </section>
+
+    <section class="card" id="editor">
+      <h2>Write a <i>story</i></h2>
+      <p class="sub" id="modeLine">新しい記事を書いています。</p>
+      <label class="f" for="title">タイトル</label>
+      <input class="in" id="title" type="text" placeholder="例：はじめての3サイト同時出品">
+      <div class="row2">
+        <div><label class="f" for="date">日付</label><input class="in" id="date" type="date"></div>
+        <div><label class="f" for="cat">カテゴリ</label>
+          <select class="in" id="cat">
+            <option value="blog">Blog（日記・お知らせ）</option>
+            <option value="making">Making（制作の裏側）</option>
+            <option value="pro">Pro（フリマ出品アシスト Pro）</option>
+            <option value="kanri">Kanri（フリマ管理アシスト）</option>
+            <option value="monon">MONON</option>
+          </select></div>
+      </div>
+      <label class="f">カバー写真（一覧と記事の一番上に出ます）</label>
+      <div class="drop" id="coverDrop"><span>ここをタップして写真を選ぶ</span><input type="file" id="cover" accept="image/*"></div>
+      <label class="f">本文</label>
+      <div class="blocks" id="blocks"></div>
+      <div class="addbar">
+        <button class="btn sm" type="button" data-add="text">＋ 文章</button>
+        <button class="btn sm" type="button" data-add="heading">＋ 見出し</button>
+        <button class="btn sm" type="button" data-add="image">＋ 写真</button>
+        <button class="btn sm" type="button" data-add="quote">＋ 引用</button>
+      </div>
+      <p class="hint">文章は、空行で段落が分かれます。URL を書くと自動でリンクになります。写真は自動で軽く（最大1600px）してから保存します。</p>
+      <div class="addbar" style="margin-top:22px"><button class="btn pri" id="publish" type="button">公開する</button><button class="btn" id="clear" type="button">書き直す（白紙に）</button></div>
+      <div class="status" id="pubStatus"></div>
+    </section>
+  </div>
+
+  <div class="preview" aria-label="プレビュー">
+    <div class="lab">LIVE PREVIEW</div>
+    <section class="article-hero" id="pvHero"><div class="copy"><div class="meta"><span class="c" id="pvCat">BLOG</span><span id="pvDate"></span><span>by niche-hobby</span></div><h1 id="pvTitle">タイトル</h1></div></section>
+    <article class="article"><div class="article-body" id="pvBody"></div></article>
+  </div>
+</div>
+
+<script>
+(function(){
+  var OWNER='fuukazin-rgb', REPO='links', BRANCH='main', API='https://api.github.com/repos/'+OWNER+'/'+REPO;
+  var CAT={blog:'Blog',making:'Making',pro:'Pro',kanri:'Kanri',monon:'MONON'};
+  var $=function(id){ return document.getElementById(id); };
+  var state={slug:null, cover:null, blocks:[]};  /* cover/image: {name, data(base64)|null, url(表示用), existing:bool} */
+
+  function token(){ try{ return localStorage.getItem('nh-gh-token')||''; }catch(e){ return ''; } }
+  function say(el,cls,msg){ el.className='status on '+cls; el.innerHTML=msg; }
+  function esc(t){ return String(t==null?'':t).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function today(){ return new Date(Date.now()+9*3600*1000).toISOString().slice(0,10); }
+  function gh(path,opt){
+    opt=opt||{}; opt.headers=Object.assign({'Authorization':'Bearer '+token(),'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},opt.headers||{});
+    return fetch(API+path,opt).then(function(r){
+      if(!r.ok) return r.text().then(function(t){ var e=new Error(r.status+' '+t.slice(0,200)); e.status=r.status; throw e; });
+      return r.status===204?null:(opt.raw?r.text():r.json());
+    });
+  }
+  function getRaw(path){ return gh('/contents/'+path+'?ref='+BRANCH,{raw:true,headers:{'Accept':'application/vnd.github.raw+json'}}); }
+
+  /* 文章 → HTML */
+  function linkify(t){ return t.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>'); }
+  function para(t){ return t.split(/\n\s*\n/).map(function(p){ p=p.trim(); return p?'<p>'+linkify(esc(p)).replace(/\n/g,'<br>')+'</p>':''; }).join('\n'); }
+  function bodyHtml(base){
+    return state.blocks.map(function(b){
+      if(b.type==='text') return para(b.text||'');
+      if(b.type==='heading') return b.text?'<h2>'+esc(b.text)+'</h2>':'';
+      if(b.type==='quote') return b.text?'<blockquote>'+esc(b.text).replace(/\n/g,'<br>')+'</blockquote>':'';
+      if(b.type==='image' && b.img) return '<figure><img src="'+(base?b.img.name:b.img.url)+'" alt="'+esc(b.caption||'')+'" loading="lazy">'+(b.caption?'<figcaption>'+esc(b.caption)+'</figcaption>':'')+'</figure>';
+      return '';
+    }).join('\n');
+  }
+  function excerpt(){
+    for(var i=0;i<state.blocks.length;i++){ var b=state.blocks[i]; if(b.type==='text'&&b.text&&b.text.trim()) return b.text.replace(/\s+/g,' ').trim().slice(0,110); }
+    return '';
+  }
+
+  /* プレビュー */
+  function preview(){
+    $('pvTitle').textContent=$('title').value||'タイトル';
+    $('pvDate').textContent=($('date').value||'').replace(/-/g,'.');
+    $('pvCat').textContent=CAT[$('cat').value]||'Blog';
+    var hero=$('pvHero'), old=hero.querySelector('img'); if(old) old.remove();
+    if(state.cover){ var im=document.createElement('img'); im.src=state.cover.url; im.alt=''; hero.insertBefore(im,hero.firstChild); }
+    $('pvBody').innerHTML=bodyHtml(false)||'<p style="color:var(--t3)">本文がここに表示されます。</p>';
+  }
+
+  /* 写真を軽くする */
+  function shrink(file){
+    return new Promise(function(res,rej){
+      var img=new Image(), url=URL.createObjectURL(file);
+      img.onload=function(){
+        var max=1600, w=img.naturalWidth, h=img.naturalHeight, k=Math.min(1,max/Math.max(w,h));
+        var c=document.createElement('canvas'); c.width=Math.round(w*k); c.height=Math.round(h*k);
+        var g=c.getContext('2d'); g.fillStyle='#fff'; g.fillRect(0,0,c.width,c.height); g.drawImage(img,0,0,c.width,c.height);
+        var d=c.toDataURL('image/jpeg',.85); URL.revokeObjectURL(url);
+        res({data:d.split(',')[1],url:d});
+      };
+      img.onerror=function(){ rej(new Error('この写真は読み込めませんでした')); };
+      img.src=url;
+    });
+  }
+  function uid(){ return Math.random().toString(36).slice(2,7); }
+
+  /* 本文ブロック */
+  var LABEL={text:'Text ／ 文章',heading:'Heading ／ 見出し',image:'Photo ／ 写真',quote:'Quote ／ 引用'};
+  function render(){
+    var box=$('blocks'); box.innerHTML='';
+    state.blocks.forEach(function(b,i){
+      var d=document.createElement('div'); d.className='blk';
+      var h='<div class="bh"><b>'+LABEL[b.type]+'</b><div class="ctl"><button class="mini" data-act="up" title="上へ">↑</button><button class="mini" data-act="down" title="下へ">↓</button><button class="mini del" data-act="del" title="削除">×</button></div></div>';
+      if(b.type==='text') h+='<textarea class="in" data-k="text" placeholder="ここに文章を書く">'+esc(b.text||'')+'</textarea>';
+      else if(b.type==='heading') h+='<input class="in" data-k="text" placeholder="見出し" value="'+esc(b.text||'')+'">';
+      else if(b.type==='quote') h+='<textarea class="in" data-k="text" style="min-height:70px" placeholder="引用したい言葉">'+esc(b.text||'')+'</textarea>';
+      else h+='<div class="drop">'+(b.img?'<img src="'+b.img.url+'" alt="">':'<span>タップして写真を選ぶ</span>')+'<input type="file" accept="image/*" data-k="file"></div><input class="in" data-k="caption" style="margin-top:8px" placeholder="写真の説明（なくてもOK）" value="'+esc(b.caption||'')+'">';
+      d.innerHTML=h;
+      d.addEventListener('input',function(e){ var k=e.target.getAttribute('data-k'); if(k==='text'||k==='caption'){ b[k]=e.target.value; preview(); } });
+      d.addEventListener('change',function(e){
+        if(e.target.getAttribute('data-k')!=='file'||!e.target.files[0]) return;
+        shrink(e.target.files[0]).then(function(r){ b.img={name:'img-'+uid()+'.jpg',data:r.data,url:r.url}; render(); preview(); }).catch(function(err){ alert(err.message); });
+      });
+      d.addEventListener('click',function(e){
+        var a=e.target.getAttribute('data-act'); if(!a) return;
+        if(a==='del'){ if(!confirm('このブロックを消しますか？')) return; state.blocks.splice(i,1); }
+        if(a==='up'&&i>0){ state.blocks.splice(i-1,0,state.blocks.splice(i,1)[0]); }
+        if(a==='down'&&i<state.blocks.length-1){ state.blocks.splice(i+1,0,state.blocks.splice(i,1)[0]); }
+        render(); preview();
+      });
+      box.appendChild(d);
+    });
+  }
+  document.querySelectorAll('[data-add]').forEach(function(btn){
+    btn.addEventListener('click',function(){ state.blocks.push({type:btn.getAttribute('data-add'),text:''}); render(); preview(); });
+  });
+  ['title','date','cat'].forEach(function(id){ $(id).addEventListener('input',preview); });
+  $('cover').addEventListener('change',function(e){
+    if(!e.target.files[0]) return;
+    shrink(e.target.files[0]).then(function(r){ state.cover={name:'cover-'+uid()+'.jpg',data:r.data,url:r.url}; showCover(); preview(); }).catch(function(err){ alert(err.message); });
+  });
+  function showCover(){
+    var d=$('coverDrop'); var inp=$('cover');
+    d.innerHTML=''; if(state.cover){ var im=document.createElement('img'); im.src=state.cover.url; im.alt=''; d.appendChild(im); } else { var s=document.createElement('span'); s.textContent='ここをタップして写真を選ぶ'; d.appendChild(s); }
+    d.appendChild(inp); inp.value='';
+  }
+  function reset(){
+    state={slug:null,cover:null,blocks:[{type:'text',text:''}]};
+    $('title').value=''; $('date').value=today(); $('cat').value='blog';
+    $('modeLine').textContent='新しい記事を書いています。';
+    showCover(); render(); preview();
+    $('pubStatus').className='status';
+  }
+  $('clear').addEventListener('click',function(){ if(confirm('入力中の内容を消して、白紙にしますか？')) reset(); });
+  $('newPost').addEventListener('click',function(){ reset(); $('editor').scrollIntoView({behavior:'smooth'}); });
+
+  /* 記事一覧 */
+  function loadList(){
+    if(!token()) return;
+    getRaw('blog/posts.json').then(function(t){
+      var posts=JSON.parse(t||'[]'), box=$('plist');
+      if(!posts.length){ box.innerHTML='<p class="hint">まだ記事はありません。下の「Write a story」から書けます。</p>'; return; }
+      box.innerHTML='';
+      posts.forEach(function(p){
+        var d=document.createElement('div'); d.className='pitem';
+        d.innerHTML=(p.cover?'<img src="/blog/'+esc(p.slug)+'/'+esc(p.cover)+'" alt="" onerror="this.style.visibility=\'hidden\'">':'<img alt="">')+
+          '<div class="tt"><b>'+esc(p.title)+'</b><small>'+esc(p.date)+' ・ '+esc(CAT[p.cat]||'Blog')+'</small></div>'+
+          '<a class="mini" href="/blog/'+esc(p.slug)+'/" target="_blank" rel="noopener" style="display:grid;place-items:center;text-decoration:none">見る</a><button class="mini" data-e>編集</button><button class="mini del" data-d>削除</button>';
+        d.querySelector('[data-e]').addEventListener('click',function(){ edit(p.slug); });
+        d.querySelector('[data-d]').addEventListener('click',function(){ remove(p); });
+        box.appendChild(d);
+      });
+    }).catch(function(e){ $('plist').innerHTML='<p class="hint">一覧を読み込めませんでした（'+esc(e.message)+'）</p>'; });
+  }
+  function edit(slug){
+    getRaw('blog/'+slug+'/post.json').then(function(t){
+      var p=JSON.parse(t); var base='/blog/'+slug+'/';
+      state={slug:slug,cover:p.cover?{name:p.cover,url:base+p.cover,existing:true}:null,blocks:(p.blocks||[]).map(function(b){
+        if(b.type==='image') return {type:'image',caption:b.caption||'',img:b.src?{name:b.src,url:base+b.src,existing:true}:null};
+        return {type:b.type,text:b.text||''};
+      })};
+      $('title').value=p.title||''; $('date').value=p.date||today(); $('cat').value=p.cat||'blog';
+      $('modeLine').textContent='「'+(p.title||'')+'」を編集しています。公開すると上書きされます。';
+      showCover(); render(); preview();
+      $('editor').scrollIntoView({behavior:'smooth'});
+    }).catch(function(e){ alert('記事を読み込めませんでした：'+e.message); });
+  }
+
+  /* GitHub に1回のコミットで保存 */
+  function commit(files, message){
+    var head;
+    return gh('/git/ref/heads/'+BRANCH).then(function(r){ head=r.object.sha; return gh('/git/commits/'+head); }).then(function(c){
+      return Promise.all(files.map(function(f){
+        if(f.remove) return Promise.resolve({path:f.path,mode:'100644',type:'blob',sha:null});
+        return gh('/git/blobs',{method:'POST',body:JSON.stringify({content:f.content,encoding:f.base64?'base64':'utf-8'})}).then(function(b){ return {path:f.path,mode:'100644',type:'blob',sha:b.sha}; });
+      })).then(function(tree){ return gh('/git/trees',{method:'POST',body:JSON.stringify({base_tree:c.tree.sha,tree:tree})}); });
+    }).then(function(t){
+      return gh('/git/commits',{method:'POST',body:JSON.stringify({message:message,tree:t.sha,parents:[head]})});
+    }).then(function(nc){
+      return gh('/git/refs/heads/'+BRANCH,{method:'PATCH',body:JSON.stringify({sha:nc.sha})});
+    });
+  }
+
+  $('publish').addEventListener('click',function(){
+    var st=$('pubStatus'), btn=this;
+    if(!token()){ say(st,'err','先に「Connect GitHub」でトークンを保存してください。'); return; }
+    var title=$('title').value.trim(); if(!title){ say(st,'err','タイトルを入れてください。'); return; }
+    if(!state.blocks.some(function(b){ return (b.text&&b.text.trim())||b.img; })){ say(st,'err','本文を入れてください。'); return; }
+    if(state.blocks.some(function(b){ return b.type==='image'&&!b.img; })){ say(st,'err','写真を選んでいないブロックがあります。写真を選ぶか、×で消してください。'); return; }
+    var date=$('date').value||today(), cat=$('cat').value;
+    var isNew=!state.slug, slug=state.slug||(date+'-'+uid());
+    var dir='blog/'+slug+'/';
+    btn.disabled=true; say(st,'wait','公開しています…（写真が多いと少し時間がかかります）');
+    Promise.all([fetch('/blog/template.html',{cache:'no-store'}).then(function(r){ if(!r.ok) throw new Error('ひな形（/blog/template.html）が見つかりません'); return r.text(); }), getRaw('blog/posts.json').catch(function(){ return '[]'; })]).then(function(res){
+      var tpl=res[0], posts=JSON.parse(res[1]||'[]');
+      var files=[];
+      if(state.cover&&!state.cover.existing) files.push({path:dir+state.cover.name,content:state.cover.data,base64:true});
+      state.blocks.forEach(function(b){ if(b.type==='image'&&b.img&&!b.img.existing) files.push({path:dir+b.img.name,content:b.img.data,base64:true}); });
+      var desc=excerpt()||title;
+      var og=state.cover?('https://niche-hobby.com/'+dir+state.cover.name):'https://niche-hobby.com/images/og.jpg';
+      var html=tpl.split('%%TITLE%%').join(esc(title)).split('%%DESC%%').join(esc(desc)).split('%%OG%%').join(esc(og))
+        .split('%%SLUG%%').join(slug).split('%%CAT%%').join(esc(CAT[cat]||'Blog')).split('%%DATE%%').join(esc(date.replace(/-/g,'.')))
+        .split('%%COVER%%').join(state.cover?'<img src="'+state.cover.name+'" alt="">':'')
+        .split('%%BODY%%').join(bodyHtml(true));
+      files.push({path:dir+'index.html',content:html});
+      var data={slug:slug,title:title,date:date,cat:cat,excerpt:desc,cover:state.cover?state.cover.name:'',blocks:state.blocks.map(function(b){ return b.type==='image'?{type:'image',src:b.img.name,caption:b.caption||''}:{type:b.type,text:b.text||''}; })};
+      files.push({path:dir+'post.json',content:JSON.stringify(data,null,1)});
+      posts=posts.filter(function(p){ return p.slug!==slug; });
+      posts.push({slug:slug,title:title,date:date,cat:cat,excerpt:desc,cover:data.cover});
+      posts.sort(function(a,b){ return a.date<b.date?1:a.date>b.date?-1:0; });
+      files.push({path:'blog/posts.json',content:JSON.stringify(posts,null,1)+'\n'});
+      return commit(files,(isNew?'ブログ記事を公開：':'ブログ記事を更新：')+title);
+    }).then(function(){
+      state.slug=slug;
+      if(state.cover) state.cover.existing=true;
+      state.blocks.forEach(function(b){ if(b.img) b.img.existing=true; });
+      $('modeLine').textContent='「'+title+'」を編集しています。公開すると上書きされます。';
+      say(st,'ok','公開しました！ 1〜2分でサイトに反映されます。<br><a href="/blog/'+slug+'/" target="_blank" rel="noopener">記事ページを開く ↗</a>');
+      loadList();
+    }).catch(function(e){
+      var m=e.status===401?'トークンが正しくないか、期限が切れています。':e.status===403||e.status===404?'トークンに書き込みの権限がありません（Contents を Read and write に）。':e.status===422||e.status===409?'ほかの変更と重なりました。もう一度「公開する」を押してください。':e.message;
+      say(st,'err','公開できませんでした：'+esc(m));
+    }).then(function(){ btn.disabled=false; });
+  });
+
+  function remove(p){
+    if(!confirm('「'+p.title+'」をサイトから削除しますか？（元に戻せません）')) return;
+    var st=$('pubStatus'); say(st,'wait','削除しています…');
+    gh('/contents/blog/'+p.slug+'?ref='+BRANCH).then(function(list){
+      return getRaw('blog/posts.json').then(function(t){
+        var posts=JSON.parse(t||'[]').filter(function(x){ return x.slug!==p.slug; });
+        var files=list.map(function(f){ return {path:f.path,remove:true}; });
+        files.push({path:'blog/posts.json',content:JSON.stringify(posts,null,1)+'\n'});
+        return commit(files,'ブログ記事を削除：'+p.title);
+      });
+    }).then(function(){ say(st,'ok','削除しました。1〜2分でサイトから消えます。'); if(state.slug===p.slug) reset(); loadList(); })
+      .catch(function(e){ say(st,'err','削除できませんでした：'+esc(e.message)); });
+  }
+
+  /* 接続 */
+  function check(){
+    var st=$('setupStatus');
+    if(!token()){ say(st,'wait','まだ接続していません。'); return; }
+    say(st,'wait','確認しています…');
+    gh('').then(function(r){
+      if(r.permissions&&r.permissions.push===false){ say(st,'err','読み取りはできますが、書き込みの権限がありません。'); return; }
+      say(st,'ok','接続できました（'+esc(r.full_name)+'）。'); loadList();
+    }).catch(function(e){ say(st,'err',e.status===401?'トークンが正しくありません。':'接続できませんでした：'+esc(e.message)); });
+  }
+  $('saveToken').addEventListener('click',function(){
+    var v=$('token').value.trim(); if(!v){ say($('setupStatus'),'err','トークンを貼り付けてください。'); return; }
+    try{ localStorage.setItem('nh-gh-token',v); }catch(e){}
+    $('token').value=''; check();
+  });
+  $('forget').addEventListener('click',function(){ try{ localStorage.removeItem('nh-gh-token'); }catch(e){} say($('setupStatus'),'wait','この端末からトークンを消しました。'); $('plist').innerHTML='<p class="hint">GitHub に接続すると表示されます。</p>'; });
+
+  window.addEventListener('beforeunload',function(e){ if($('title').value||state.blocks.some(function(b){ return b.text||b.img; })){ e.preventDefault(); e.returnValue=''; } });
+  reset(); check();
+})();
+</script>
+</body>
+</html>
