@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>フリマ管理アシスト | niche-hobby</title>
+<meta name="description" content="転記から在庫の管理、売れたあとの一括削除まで。カテゴリ・ブランドも自動入力。複数フリマを掛け持ちする人のためのChrome拡張機能。7日間無料。">
+<meta property="og:title" content="フリマ管理アシスト | niche-hobby">
+<meta property="og:description" content="転記から在庫の管理、売れたあとの一括削除まで。カテゴリ・ブランドも自動入力。複数フリマを掛け持ちする人のためのChrome拡張機能。7日間無料。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://niche-hobby.com/tools/kanri/">
+<meta property="og:image" content="https://niche-hobby.com/images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#08090C">
+<link rel="canonical" href="https://niche-hobby.com/tools/kanri/">
+<link rel="icon" href="/images/nh-mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/images/icon-pro.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Instrument+Serif:ital@0;1&family=Sora:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<a class="sr" href="#main">本文へ移動</a>
+<header class="gh">
+  <div class="in">
+    <a class="brand" href="/" aria-label="niche hobby トップへ">
+      <svg viewBox="0 0 120 96" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" aria-hidden="true"><path class="mk-n" d="M14 86V48Q14 34 37 34Q60 34 60 48"/><path class="mk-h" d="M60 10V86M60 48Q60 34 83 34Q106 34 106 48V86"/></svg>
+      <div><b>niche <span>hobby</span></b><small>Tools for flea-market sellers</small></div>
+    </a>
+    <div class="right">
+      <div class="tagline">List once, <em>sell everywhere.</em> ― フリマせどりの Chrome 拡張機能</div>
+      <nav class="gnav" aria-label="メインメニュー"><a href="/">TOP</a><a href="/tools/" aria-current="page">TOOLS</a><a href="/price/">PRICE</a><a href="/movies/">MOVIES</a><a href="/support/">SUPPORT</a><a href="/monon/" class="mono-l">MONON</a><a href="/about/">ABOUT</a></nav>
+    </div>
+    <div class="tools-h">
+      <button class="ib" id="motionBtn" type="button" aria-label="アニメーションを止める"></button>
+      <button class="ib menu-btn" id="menuBtn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="drawer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-label="メニュー">
+  <div class="top">
+    <a class="brand" href="/"><svg viewBox="0 0 120 96" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" aria-hidden="true"><path class="mk-n" d="M14 86V48Q14 34 37 34Q60 34 60 48"/><path class="mk-h" d="M60 10V86M60 48Q60 34 83 34Q106 34 106 48V86"/></svg><div><b>niche <span>hobby</span></b></div></a>
+    <button class="ib" id="menuClose" type="button" aria-label="メニューを閉じる"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <nav><a href="/">TOP<small>トップ</small></a><a href="/tools/" aria-current="page">TOOLS<small>ツール</small></a><a href="/price/">PRICE<small>料金</small></a><a href="/movies/">MOVIES<small>動画</small></a><a href="/support/">SUPPORT<small>サポート</small></a><a href="/monon/">MONON<small>モノン</small></a><a href="/about/">ABOUT<small>私たちについて</small></a></nav>
+  <div class="tl">List once, sell everywhere.</div>
+</div>
+<main id="main">
+<section class="pbanner" aria-label="フリマ管理アシスト">
+  <div class="art"></div>
+  <div class="ghost" aria-hidden="true">Stock</div>
+  <div class="visual"><img src="/images/icon-kanri.png" alt="" style="width:120px;border-radius:30px;box-shadow:0 0 80px -6px var(--em-glow)"></div>
+  <div class="copy">
+    <div class="crumb"><a href="/">TOP</a> ／ <a href="/tools/">TOOLS</a> ／ KANRI</div>
+    <h1>Kanri</h1>
+    <p>フリマ管理アシスト</p>
+    <p class="lead">転記から在庫の管理、売れたあとの削除まで。複数のフリマを掛け持ちする人のためのツールです。</p>
+  </div>
+</section>
+<section class="sec wrap">
+  <div class="prod">
+    <div class="vis glow-edge reveal"><div class="dash" aria-label="フリマ管理アシストの商品管理画面のイメージ">
+  <div class="bar0"><i></i><i></i><i></i>&nbsp;フリマ管理アシスト ― 商品管理</div>
+  <table>
+    <thead><tr><th>商品</th><th>出品先</th><th>状態</th><th></th></tr></thead>
+    <tbody>
+      <tr><td>ショルダーバッグ<small>A-0128</small></td><td><span class="dot" style="background:var(--mercari)"></span><span class="dot" style="background:var(--rakuma)"></span><span class="dot" style="background:var(--yfrima)"></span></td><td><span class="st sold">売却済</span></td><td><span class="st">他サイト削除済</span></td></tr>
+      <tr><td>レトロ食器 5点<small>A-0129</small></td><td><span class="dot" style="background:var(--mercari)"></span><span class="dot" style="background:var(--rakuma)"></span><span class="dot" style="background:var(--yauc)"></span></td><td><span class="st">出品中</span></td><td><span class="sold-btn">売れた！</span></td></tr>
+      <tr><td>古書 まとめ<small>A-0130</small></td><td><span class="dot" style="background:var(--mercari)"></span><span class="dot" style="background:var(--yfrima)"></span></td><td><span class="st">出品中</span></td><td><span class="sold-btn" style="animation-delay:-1.2s">売れた！</span></td></tr>
+    </tbody>
+  </table>
+  <div class="cap">SAMPLE DATA ／ 画面イメージ</div>
+</div></div>
+    <div class="reveal">
+      <div class="tag"><span>有料</span><span>転記＋管理</span><span>7日間無料・カード不要</span></div>
+      <h2><img src="/images/icon-kanri.png" alt=""><span class="neon d2">フリマ管理アシスト</span></h2>
+      <p class="desc">取得した商品を管理番号で保存して、いつでも呼び出して再出品や価格変更。売れたら「売れた！」ボタンひとつで、他サイトの出品をまとめて削除します。二重売りの心配が減ります。</p>
+      <div class="markets" style="margin-top:18px"><span class="mk m"><i></i>メルカリ</span><span class="mk r"><i></i>ラクマ</span><span class="mk y"><i></i>Yahoo!フリマ</span><span class="mk a"><i></i>ヤフオク</span></div>
+      <div class="price-line"><b>¥690</b><span>/ 月</span><b>¥5,900</b><span>/ 年（約2ヶ月分お得）</span></div>
+      <div class="cta"><a class="btn pri" href="https://fuukazin.gumroad.com/l/hnpwm" target="_blank" rel="noopener">7日間無料で試す →</a><a class="btn" href="#movie">動画で見る</a></div>
+      <p class="note">トライアルはクレジットカード不要です。</p>
+    </div>
+  </div>
+</section>
+<section class="sec tight wrap">
+  <div class="head reveal">
+  <div class="t"><div class="k">Features</div><h2>Features<small>できること</small></h2></div>
+  
+</div>
+  <div class="feat-grid">
+    <div class="glass feat reveal"><div class="n">01</div><h3>ワンクリック転記</h3><p>タイトル・価格・説明文・商品の状態・画像を自動入力。画像はラクマ・Yahoo!フリマに最大20枚、ヤフオクに最大10枚。</p></div>
+    <div class="glass feat hot reveal"><div class="n">02</div><h3>カテゴリ・ブランドも自動入力</h3><p>ブランドは英語表記を優先して入力・選択します（例：セイコー → SEIKO）。</p></div>
+    <div class="glass feat reveal"><div class="n">03</div><h3>商品管理DB</h3><p>取得した商品を管理番号で保存。呼び出すだけで再出品や価格変更ができます。</p></div>
+    <div class="glass feat reveal"><div class="n">04</div><h3>「売れた！」で一括削除</h3><p>他サイトの出品をまとめて削除して、二重売りを防ぎます。</p></div>
+    <div class="glass feat reveal"><div class="n">05</div><h3>Yahoo!フリマ補助パネル</h3><p>Yahoo!フリマ・ヤフオクの出品の流れも、画面に沿ってサポートします。</p></div>
+    <div class="glass feat reveal"><div class="n">06</div><h3>カード不要のトライアル</h3><p>7日間すべての機能を試せます。自動で課金されることはありません。</p></div>
+  </div>
+</section>
+<section class="sec tight wrap">
+  <div class="glass matrix reveal">
+    <h3>転記できる項目</h3>
+    <table>
+      <thead><tr><th>転記先</th><th>タイトル</th><th>価格</th><th>説明文</th><th>商品の状態</th><th>カテゴリ・ブランド</th><th>画像</th></tr></thead>
+      <tbody>
+        <tr><td>ラクマ</td><td class="ok">●</td><td class="ok">●</td><td class="ok">●</td><td class="ok">●</td><td class="ok">●</td><td>最大20枚</td></tr>
+        <tr><td>Yahoo!フリマ</td><td class="ok">●</td><td class="ok">●</td><td class="ok">●</td><td class="na">―</td><td class="ok">●</td><td>最大20枚</td></tr>
+        <tr><td>ヤフオク</td><td class="ok">●</td><td class="ok">●</td><td class="ok">●</td><td class="na">―</td><td class="na">―</td><td>最大10枚</td></tr>
+      </tbody>
+    </table>
+    <p class="note">カテゴリ・ブランドは、各サイトのデータベースにない場合などは手動で選んでください。配送方法など一部の項目は、各サイトの仕様上、手動での選択が必要です。</p>
+  </div>
+</section>
+<section class="sec tight wrap" id="movie">
+  <div class="head reveal">
+  <div class="t"><div class="k">Movie</div><h2>Movie<small>動画で見る</small></h2></div>
+  <a class="more" href="/movies/">All movies →</a>
+</div>
+  <div class="movies">
+    <div class="glass movie reveal"><button class="yt" data-id="9zyZ_JSLr0o" aria-label="フリマ管理アシスト 大型アップデート紹介"><img src="https://i.ytimg.com/vi/9zyZ_JSLr0o/hqdefault.jpg" alt="" loading="lazy"><span class="badge new">NEW</span><span class="play"></span></button><div class="mt"><b>カテゴリ・ブランド自動入力の大型アップデート</b><span>約3分の紹介動画</span></div></div>
+    <div class="glass movie reveal"><button class="yt" data-id="89o7kxexUT4" aria-label="Yahoo!フリマ補助パネルとヤフオク出品の流れ"><img src="https://i.ytimg.com/vi/89o7kxexUT4/hqdefault.jpg" alt="" loading="lazy"><span class="badge">YOUTUBE</span><span class="play"></span></button><div class="mt"><b>Yahoo!フリマ補助パネルとヤフオク出品</b><span>出品の流れを画面で</span></div></div>
+  </div>
+</section>
+<section class="wrap reveal" aria-label="無料トライアル">
+  <div class="ctab">
+    <div class="k">FREE TRIAL ／ 7 DAYS</div>
+    <h2>Try it free.</h2>
+    <p>7日間、すべての機能を無料で試せます。自動で課金されることはありません。</p>
+    <div class="cta">
+      <a class="btn" href="/tools/pro/">フリマ出品アシスト Pro →</a>
+      <a class="btn ghost" href="/tools/kanri/">フリマ管理アシスト →</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="gf">
+  <div class="big" aria-hidden="true">niche <span>hobby</span></div>
+  <div class="cols">
+    <div>
+      <a class="brand" href="/"><svg viewBox="0 0 120 96" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" aria-hidden="true"><path class="mk-n" d="M14 86V48Q14 34 37 34Q60 34 60 48"/><path class="mk-h" d="M60 10V86M60 48Q60 34 83 34Q106 34 106 48V86"/></svg><div><b>niche <span>hobby</span></b></div></a>
+      <p class="about">フリマせどりの「同じ作業のくり返し」を、Chrome 拡張機能で短くする個人開発ブランドです。</p>
+    </div>
+    <div><h4>Tools</h4><ul>
+      <li><a href="/tools/pro/">フリマ出品アシスト Pro</a></li>
+      <li><a href="/tools/kanri/">フリマ管理アシスト</a></li>
+      <li><a href="/tools/price-check/">メルカリ価格比較アシスト</a></li>
+      <li><a href="/price/">料金</a></li>
+    </ul></div>
+    <div><h4>Support</h4><ul>
+      <li><a href="/support/#flow">はじめ方</a></li>
+      <li><a href="/support/#faq">よくある質問</a></li>
+      <li><a href="/support/#contact">お問い合わせ</a></li>
+      <li><a href="/movies/">動画で見る</a></li>
+    </ul></div>
+    <div><h4>Info</h4><ul>
+      <li><a href="/about/">ABOUT</a></li>
+      <li><a href="/about/#journal">ブログ（JOURNAL）</a></li>
+      <li><a href="/monon/">MONON</a></li>
+      <li><a href="https://note.com/niche_hobby" target="_blank" rel="noopener">note</a></li>
+      <li><a href="/tokusho">特定商取引法に基づく表記</a></li>
+      <li><a href="https://fuukazin-rgb.github.io/furima-privacy/privacy_policy.html">プライバシーポリシー</a></li>
+    </ul></div>
+  </div>
+  <div class="bottom"><span>© niche-hobby</span><span>FUKUOKA, JAPAN ／ JST <b id="clock">--:--:--</b></span></div>
+</footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>
