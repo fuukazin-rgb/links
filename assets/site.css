@@ -515,3 +515,20 @@ button{font:inherit;color:inherit}
 .article-body blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(24px,3vw,34px);line-height:1.35;color:var(--text);margin:1.6em 0;padding:0 0 0 22px;border-left:2px solid var(--em-hi)}
 .article-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;margin-top:50px;padding-top:28px;border-top:1px solid var(--line)}
 .article-foot .sign{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--t2)}
+
+/* ===== MONON（本物のイラスト）の動き ===== */
+.monon-svg{display:block}
+.sv-monon .monon-svg{width:clamp(130px,12.5vw,190px)}
+.mbanner .stage .monon-svg{width:150px}
+.monon-img{display:block;width:100%;height:auto;transform-origin:50% 94%;animation:mhop 4s ease-in-out infinite;filter:drop-shadow(0 24px 22px rgba(0,0,0,.6))}
+/* 吹き出しが「ぽん」と出る瞬間（60%）に合わせて、しゃがんで→ぴょこっと跳ねて→着地 */
+@keyframes mhop{
+  0%,50%,100%{transform:none}
+  55%{transform:translateY(5px) scale(1.05,.94)}
+  61%{transform:translateY(-18px) rotate(-5deg) scale(.97,1.04)}
+  67%{transform:translateY(0) rotate(3deg) scale(1.04,.96)}
+  72%{transform:rotate(-1.5deg)}
+  78%{transform:none}}
+.monon-shadow{position:absolute;left:22%;right:22%;bottom:-3%;height:16px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.28),transparent 70%);filter:blur(3px);z-index:-1;animation:mshadow 4s ease-in-out infinite}
+@keyframes mshadow{0%,50%,100%{transform:scale(1);opacity:1}55%{transform:scale(1.12)}61%{transform:scale(.7);opacity:.5}67%{transform:scale(1.1);opacity:1}78%{transform:scale(1)}}
+@media (max-width:760px){.sv-monon .monon-svg{width:118px}}

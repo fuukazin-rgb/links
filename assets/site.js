@@ -135,9 +135,14 @@
     m.style.cursor='pointer';
     m.addEventListener('click',function(ev){
       ev.preventDefault();
-      m.classList.add('surprise');
       if(bubble){ w=(w+1)%words.length; bubble.textContent=words[w]; }
-      setTimeout(function(){ m.classList.remove('surprise'); },700);
+      var img=m.querySelector('.monon-img');
+      if(img&&img.animate&&motionOn){
+        try{
+          img.animate([{transform:'translateY(0) rotate(0)'},{transform:'translateY(-30px) rotate(8deg)'},{transform:'translateY(0) rotate(-4deg)'},{transform:'translateY(-8px) rotate(2deg)'},{transform:'translateY(0) rotate(0)'}],{duration:700,easing:'ease-out',composite:'add'});
+        }catch(e){}
+      }
+      if(bubble&&bubble.animate&&motionOn){ try{ bubble.animate([{transform:'scale(.6)'},{transform:'scale(1.15)'},{transform:'scale(1)'}],{duration:400,easing:'ease-out',composite:'add'}); }catch(e){} }
     });
   });
 
