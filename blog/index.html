@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Journal | niche-hobby</title>
+<meta name="description" content="niche-hobby のブログ。新機能の紹介、使い方、MONON のストーリー、制作の裏側。">
+<meta property="og:title" content="Journal | niche-hobby">
+<meta property="og:description" content="niche-hobby のブログ。新機能の紹介、使い方、MONON のストーリー、制作の裏側。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://niche-hobby.com/blog/">
+<meta property="og:image" content="https://niche-hobby.com/images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#08090C">
+<link rel="canonical" href="https://niche-hobby.com/blog/">
+<link rel="icon" href="/images/nh-mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/images/icon-pro.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Instrument+Serif:ital@0;1&family=Sora:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<a class="sr" href="#main">本文へ移動</a>
+<header class="gh">
+  <div class="in">
+    <a class="brand" href="/" aria-label="niche hobby トップへ">
+      <svg viewBox="0 0 120 96" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" aria-hidden="true"><path class="mk-n" d="M14 86V48Q14 34 37 34Q60 34 60 48"/><path class="mk-h" d="M60 10V86M60 48Q60 34 83 34Q106 34 106 48V86"/></svg>
+      <div><b>niche <span>hobby</span></b><small>Tools for flea-market sellers</small></div>
+    </a>
+    <div class="right">
+      <div class="tagline">List once, <em>sell everywhere.</em> ― フリマせどりの Chrome 拡張機能</div>
+      <nav class="gnav" aria-label="メインメニュー"><a href="/">TOP</a><a href="/tools/">TOOLS</a><a href="/price/">PRICE</a><a href="/movies/">MOVIES</a><a href="/support/">SUPPORT</a><a href="/monon/" class="mono-l">MONON</a><a href="/about/" aria-current="page">ABOUT</a></nav>
+    </div>
+    <div class="tools-h">
+      <button class="ib" id="motionBtn" type="button" aria-label="アニメーションを止める"></button>
+      <button class="ib menu-btn" id="menuBtn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="drawer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-label="メニュー">
+  <div class="top">
+    <a class="brand" href="/"><svg viewBox="0 0 120 96" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" aria-hidden="true"><path class="mk-n" d="M14 86V48Q14 34 37 34Q60 34 60 48"/><path class="mk-h" d="M60 10V86M60 48Q60 34 83 34Q106 34 106 48V86"/></svg><div><b>niche <span>hobby</span></b></div></a>
+    <button class="ib" id="menuClose" type="button" aria-label="メニューを閉じる"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <nav><a href="/">TOP<small>トップ</small></a><a href="/tools/">TOOLS<small>ツール</small></a><a href="/price/">PRICE<small>料金</small></a><a href="/movies/">MOVIES<small>動画</small></a><a href="/support/">SUPPORT<small>サポート</small></a><a href="/monon/">MONON<small>モノン</small></a><a href="/about/" aria-current="page">ABOUT<small>私たちについて</small></a></nav>
+  <div class="tl">List once, sell everywhere.</div>
+</div>
+<main id="main">
+<section class="pbanner" aria-label="Journal">
+  <div class="art"></div>
+  <div class="ghost" aria-hidden="true">Stories</div>
+  <div class="copy">
+    <div class="crumb"><a href="/">TOP</a> ／ <a href="/about/">ABOUT</a> ／ JOURNAL</div>
+    <h1>The <i style="font-family:var(--serif);font-weight:400;text-transform:none;color:var(--em-hi);text-shadow:0 0 30px var(--em-glow)">Journal</i></h1>
+    <p>ブログ ／ 制作の記録</p>
+    <p class="lead">フリマ出品アシスト Pro・フリマ管理アシスト・MONON の note と、このサイトで書いた記事をまとめています。</p>
+  </div>
+</section>
+<section class="sec tight wrap">
+  <div class="mag-h reveal">
+    <div><div class="eyebrow">Stories ／ Updates ／ Making-of</div><h2>The <i>Journal</i></h2></div>
+    <p>New features, how-tos, MONON's stories &amp; behind the scenes.</p>
+  </div>
+  <div class="jfilter reveal" role="group" aria-label="Filter stories">
+    <button type="button" data-cat="all" aria-pressed="true">All <i>stories</i></button>
+    <button type="button" data-cat="pro" aria-pressed="false">Pro</button>
+    <button type="button" data-cat="kanri" aria-pressed="false">Kanri</button>
+    <button type="button" data-cat="monon" aria-pressed="false">MONON</button>
+    <button type="button" data-cat="blog" aria-pressed="false">Blog</button>
+    <button type="button" data-cat="making" aria-pressed="false">Making</button>
+  </div>
+  <div class="journal" data-src="1" data-limit="0"><noscript><p class="note">記事一覧の表示には JavaScript が必要です。</p></noscript></div>
+  <div class="jmore reveal"><a class="btn" href="https://note.com/niche_hobby" target="_blank" rel="noopener">note ／ niche-hobby →</a><a class="btn" href="https://note.com/monon_clay" target="_blank" rel="noopener">note ／ MONON →</a></div>
+</section>
+</main>
+<footer class="gf">
+  <div class="big" aria-hidden="true">niche <span>hobby</span></div>
+  <div class="cols">
+    <div>
+      <a class="brand" href="/"><svg viewBox="0 0 120 96" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" aria-hidden="true"><path class="mk-n" d="M14 86V48Q14 34 37 34Q60 34 60 48"/><path class="mk-h" d="M60 10V86M60 48Q60 34 83 34Q106 34 106 48V86"/></svg><div><b>niche <span>hobby</span></b></div></a>
+      <p class="about">フリマせどりの「同じ作業のくり返し」を、Chrome 拡張機能で短くする個人開発ブランドです。</p>
+    </div>
+    <div><h4>Tools</h4><ul>
+      <li><a href="/tools/pro/">フリマ出品アシスト Pro</a></li>
+      <li><a href="/tools/kanri/">フリマ管理アシスト</a></li>
+      <li><a href="/tools/price-check/">メルカリ価格比較アシスト</a></li>
+      <li><a href="/price/">料金</a></li>
+    </ul></div>
+    <div><h4>Support</h4><ul>
+      <li><a href="/support/#flow">はじめ方</a></li>
+      <li><a href="/support/#faq">よくある質問</a></li>
+      <li><a href="/support/#contact">お問い合わせ</a></li>
+      <li><a href="/movies/">動画で見る</a></li>
+    </ul></div>
+    <div><h4>Info</h4><ul>
+      <li><a href="/about/">ABOUT</a></li>
+      <li><a href="/about/#journal">ブログ（JOURNAL）</a></li>
+      <li><a href="/monon/">MONON</a></li>
+      <li><a href="https://note.com/niche_hobby" target="_blank" rel="noopener">note</a></li>
+      <li><a href="/tokusho">特定商取引法に基づく表記</a></li>
+      <li><a href="https://fuukazin-rgb.github.io/furima-privacy/privacy_policy.html">プライバシーポリシー</a></li>
+    </ul></div>
+  </div>
+  <div class="bottom"><span>© niche-hobby</span><span>FUKUOKA, JAPAN ／ JST <b id="clock">--:--:--</b></span></div>
+</footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>
