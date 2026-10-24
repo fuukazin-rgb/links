@@ -3,7 +3,7 @@
  "title": "好きなものに囲まれて、つくっている。｜わたしの作業スペース",
  "date": "2026-10-24",
  "cat": "making",
- "cover": "img-macmini.jpg",
+ "cover": "img-desk-anime.jpg",
  "blocks": [
   {
    "type": "text",
@@ -12,11 +12,6 @@
   {
    "type": "heading",
    "text": "毎日いちばん働いている、小さな箱"
-  },
-  {
-   "type": "image",
-   "src": "img-macmini.jpg",
-   "caption": "Mac mini と、革と、金の十字架。"
   },
   {
    "type": "text",
@@ -28,7 +23,7 @@
   },
   {
    "type": "image",
-   "src": "img-desk-2.jpg",
+   "src": "img-desk-anime.jpg",
    "caption": "左の画面で調べて、右の画面で Claude と相談しながらつくる。"
   },
   {
