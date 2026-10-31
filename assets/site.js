@@ -1,4 +1,17 @@
 /* niche-hobby 共通スクリプト */
+/* Google アナリティクス（アクセス解析） */
+(function(){
+  if(/\/admin\//.test(location.pathname)) return;
+  var id='G-PT8WZ1PBPW';
+  var s=document.createElement('script'); s.async=true;
+  s.src='https://www.googletagmanager.com/gtag/js?id='+id;
+  document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=function(){dataLayer.push(arguments);};
+  gtag('js',new Date());
+  gtag('config',id);
+})();
+
 (function(){
   var root=document.documentElement;
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
