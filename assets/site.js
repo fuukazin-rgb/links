@@ -2,6 +2,13 @@
 /* Google アナリティクス（アクセス解析） */
 (function(){
   if(/\/admin\//.test(location.pathname)) return;
+  /* 自分のアクセスを除外：?noga=1 で一度開いた端末は計測しない（?noga=0 で解除） */
+  try{
+    var q=location.search;
+    if(/[?&]noga=1/.test(q)) localStorage.setItem('nh-noga','1');
+    if(/[?&]noga=0/.test(q)) localStorage.removeItem('nh-noga');
+    if(localStorage.getItem('nh-noga')==='1') return;
+  }catch(e){}
   var id='G-PT8WZ1PBPW';
   var s=document.createElement('script'); s.async=true;
   s.src='https://www.googletagmanager.com/gtag/js?id='+id;
